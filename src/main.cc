@@ -22,6 +22,16 @@
 #include "QGCApplication.h"
 #include "AppMessages.h"
 
+#include <nanomsg/bus.h>
+#include <nanomsg/nn.h>
+#include <nanomsg/pair.h>
+#include <pthread.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+
+
 #ifndef NO_SERIAL_LINK
     #include "SerialLink.h"
 #endif
@@ -237,6 +247,7 @@ void sigHandler(int s)
 
 int main(int argc, char *argv[])
 {
+
 #ifndef __mobile__
     // We make the runguard key different for custom and non custom
     // builds, so they can be executed together in the same device.

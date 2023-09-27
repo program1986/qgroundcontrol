@@ -54,6 +54,7 @@ Item {
                 opacity:            0.5
             }
 
+
             QGCLabel {
                 id:                 noVideoLabel
                 text:               QGroundControl.settingsManager.videoSettings.streamEnabled.rawValue ? qsTr("WAITING FOR VIDEO") : qsTr("VIDEO DISABLED")
@@ -64,9 +65,12 @@ Item {
             }
         }
 
+    //这个是最后的底框
     Rectangle {
         anchors.fill:   parent
         color:          "black"
+
+        //如果存在视频流就显示
         visible:        QGroundControl.videoManager.decoding
         function getWidth() {
             //-- Fit Width or Stretch
@@ -190,6 +194,7 @@ Item {
             anchors.fill:   parent
             onPinchStarted: pinchZoom.zoom = 0
             onPinchUpdated: {
+                console.log("onPinchUpdated")
                 if(_hasZoom) {
                     var z = 0
                     if(pinch.scale < 1) {
@@ -204,5 +209,62 @@ Item {
             }
             property int zoom: 0
         }
+
+        Rectangle {
+                id: box
+                color: "transparent"
+                border.color: "red"
+                border.width: 2
+                visible: false
+
+                property int startX
+                property int startY
+
+                function updateBox(x, y) {
+                    var width = x - startX
+                    var height = y - startY
+
+                    if (width < 0) {
+                        box.x = x
+                        box.width = -width
+                    } else {
+                        box.x = startX
+                        box.width = width
+                    }
+
+                    if (height < 0) {
+                        box.y = y
+                        box.height = -height
+                    } else {
+                        box.y = startY
+                        box.height = height
+                    }
+                }
+
+                MouseArea {
+                    id: mouseArea
+                    anchors.fill: parent
+                    hoverEnabled: true
+
+                    onPressed: {
+                        startX = mouse.x
+                        startY = mouse.y
+                        box.updateBox(mouse.x, mouse.y)
+                        box.visible = true
+                        console.log("Mouse pressed at (" + startX + ", " + startY + ")")
+
+                    }
+
+                    onPositionChanged: {
+                        box.updateBox(mouse.x, mouse.y)
+                        console.log("Mouse moved to (" + mouse.x + ", " + mouse.y + ")")
+                    }
+
+                    onReleased: {
+                        box.visible = false
+                        console.log("Mouse released at (" + mouse.x + ", " + mouse.y + ")")
+                    }
+                }
+            }
     }
 }

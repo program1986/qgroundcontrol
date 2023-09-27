@@ -73,6 +73,7 @@ Item {
         bottomEdgeLeftInset:    _pipOverlay.visible ? parent.height - _pipOverlay.y : 0
     }
 
+
     FlyViewWidgetLayer {
         id:                     widgetLayer
         anchors.top:            parent.top
@@ -85,6 +86,7 @@ Item {
         visible:                !QGroundControl.videoManager.fullScreen
     }
 
+
     FlyViewCustomLayer {
         id:                 customOverlay
         anchors.fill:       widgetLayer
@@ -94,12 +96,14 @@ Item {
         visible:            !QGroundControl.videoManager.fullScreen
     }
 
+
     GuidedActionsController {
         id:                 guidedActionsController
         missionController:  _missionController
         actionList:         _guidedActionList
         guidedValueSlider:     _guidedValueSlider
     }
+
 
     /*GuidedActionConfirm {
         id:                         guidedActionConfirm
@@ -111,6 +115,8 @@ Item {
         guidedValueSlider:             _guidedValueSlider
     }*/
 
+
+    //这个不知道是什么
     GuidedActionList {
         id:                         guidedActionList
         anchors.margins:            _margins
@@ -119,6 +125,8 @@ Item {
         z:                          QGroundControl.zOrderTopMost
         guidedController:           _guidedController
     }
+
+
 
     //-- Guided value slider (e.g. altitude)
     GuidedValueSlider {
@@ -130,9 +138,10 @@ Item {
         z:                  QGroundControl.zOrderTopMost
         radius:             ScreenTools.defaultFontPixelWidth / 2
         width:              ScreenTools.defaultFontPixelWidth * 10
-        color:              qgcPal.window
+        color:              qgcPal.window 
         visible:            false
     }
+
 
     FlyViewMap {
         id:                     mapControl
@@ -143,9 +152,11 @@ Item {
         mapName:                "FlightDisplayView"
     }
 
+    //Video 播放界面
     FlyViewVideo {
         id: videoControl
     }
+
 
     QGCPipOverlay {
         id:                     _pipOverlay
@@ -160,4 +171,5 @@ Item {
         show:                   !QGroundControl.videoManager.fullScreen &&
                                     (videoControl.pipState.state === videoControl.pipState.pipState || mapControl.pipState.state === mapControl.pipState.pipState)
     }
+
 }

@@ -10,6 +10,8 @@
 import QtQuick          2.3
 import QtQuick.Controls 1.2
 import QtQuick.Layouts  1.2
+import QtQuick.Controls.Fusion 2.13
+import "/Users/shijingwei/Sourcecode/QT/qgroundcontrol/qgroundcontrol/src/QmlControls"
 
 import QGroundControl               1.0
 import QGroundControl.Controls      1.0

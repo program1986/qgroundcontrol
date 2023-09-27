@@ -88,6 +88,8 @@ G_BEGIN_DECLS
     GST_PLUGIN_STATIC_DECLARE(mpegtsdemux);
     GST_PLUGIN_STATIC_DECLARE(opengl);
     GST_PLUGIN_STATIC_DECLARE(tcp);
+    GST_PLUGIN_STATIC_DECLARE(flv);
+    GST_PLUGIN_STATIC_DECLARE(rtmp);
 #if defined(__android__)
     GST_PLUGIN_STATIC_DECLARE(androidmedia);
 #elif defined(__ios__)

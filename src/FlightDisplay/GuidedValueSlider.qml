@@ -90,6 +90,7 @@ Rectangle {
         anchors.left:       parent.left
         anchors.right:      parent.right
 
+
         QGCLabel {
             anchors.left:           parent.left
             anchors.right:          parent.right
@@ -97,6 +98,7 @@ Rectangle {
             horizontalAlignment:    Text.AlignHCenter
             text:                   _displayText
         }
+
 
         QGCLabel {
             id:                         valueField

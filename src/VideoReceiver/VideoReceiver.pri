@@ -21,9 +21,13 @@ LinuxBuild {
 } else:MacBuild {
     #- gstreamer framework installed by the gstreamer devel installer
     GST_ROOT = /Library/Frameworks/GStreamer.framework
+
     exists($$GST_ROOT) {
         CONFIG      += VideoEnabled
         INCLUDEPATH += $$GST_ROOT/Headers
+        INCLUDEPATH += $$GST_ROOT/Versions/1.0/include/glib-2.0
+        INCLUDEPATH += $$GST_ROOT/Versions/1.0/include/gstreamer-1.0
+        INCLUDEPATH += $$GST_ROOT/Versions/1.0/Headers
         LIBS        += -F/Library/Frameworks -framework GStreamer
         QMAKE_LIBDIR += $$GST_ROOT/Versions/1.0/lib/
     }
@@ -96,10 +100,13 @@ LinuxBuild {
             -lgstmpegtsdemux \
             -lgstandroidmedia \
             -lgstopengl \
-            -lgsttcp
+            -lgsttcp \
+            -lgstflv
+            -lgstrtmp
 
         # Rest of GStreamer dependencies
         LIBS += -L$$GST_ROOT/lib \
+            -lrtmp -lssl -lcrypto -lopenh264\
             -lgraphene-1.0 -ljpeg -lpng16 \
             -lgstfft-1.0 -lm  \
             -lgstnet-1.0 -lgio-2.0 \
