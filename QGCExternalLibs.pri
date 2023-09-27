@@ -277,3 +277,28 @@ contains (DEFINES, DISABLE_ZEROCONF) {
 } else {
     message("Skipping support for Zeroconf (unsupported platform)")
 }
+
+
+
+# nanomsg
+MacBuild {
+    INCLUDEPATH += \
+        $$SOURCE_DIR/libs/nanomsg-1.2/x86_lib/include
+    LIBS += \
+        -L$$SOURCE_DIR/libs/nanomsg-1.2/x86_lib/lib  -lnanomsg
+
+}
+
+
+
+
+#else:LinuxBuild {
+#    PKGCONFIG = sdl2
+#} else:WindowsBuild {
+#    INCLUDEPATH += $$SOURCE_DIR/libs/sdl2/msvc/include
+#    INCLUDEPATH += $$SOURCE_DIR/libs/OpenSSL/Windows/x64/include
+#    LIBS += -L$$SOURCE_DIR/libs/sdl2/msvc/lib/x64
+#    LIBS += -lSDL2
+#}
+
+
