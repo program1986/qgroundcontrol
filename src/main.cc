@@ -30,6 +30,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <QmlControls/QmlNanomsgControl.h>
 
 
 #ifndef NO_SERIAL_LINK
@@ -248,6 +249,7 @@ void sigHandler(int s)
 int main(int argc, char *argv[])
 {
 
+
 #ifndef __mobile__
     // We make the runguard key different for custom and non custom
     // builds, so they can be executed together in the same device.
@@ -265,6 +267,8 @@ int main(int argc, char *argv[])
         );
         return -1;
     }
+
+
 #endif
 
     //-- Record boot time
@@ -423,6 +427,7 @@ int main(int argc, char *argv[])
 #endif
     {
 
+
 #ifdef __android__
         checkAndroidWritePermission();
 #endif
@@ -431,6 +436,8 @@ int main(int argc, char *argv[])
         }
         exitCode = app->exec();
     }
+
+
 
     app->_shutdown();
     delete app;

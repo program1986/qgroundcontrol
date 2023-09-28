@@ -14,6 +14,7 @@ import QGroundControl 1.0
 import QGroundControl.Controls 1.0
 import QGroundControl.Controllers 1.0
 import QGroundControl.ScreenTools 1.0
+import QmlNanoMsgControl 1.0
 
 Item {
     id: _root
@@ -131,6 +132,11 @@ Item {
 
         }
 
+        //QmlNanoMsgControl
+        //{
+        //      id: qmlNanoMsgControl
+        //}
+
         MouseArea {
             id: area
             anchors.fill: parent
@@ -141,6 +147,13 @@ Item {
             }
             onPositionChanged: {
                 canvas.requestPaint()
+            }
+            onReleased: {
+                //QmlNanoMsgControl.sendMsg("aaaaa")
+                //console.log(QmlNanoMsgControl.toString())
+                //qmlNanoMsgControl.aaa()
+
+
             }
         }
     }

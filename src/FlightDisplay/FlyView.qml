@@ -26,6 +26,8 @@ import QGroundControl.FlightMap     1.0
 import QGroundControl.Palette       1.0
 import QGroundControl.ScreenTools   1.0
 import QGroundControl.Vehicle       1.0
+import QmlNanoMsgControl            1.0
+
 
 Item {
     id: _root
@@ -171,5 +173,30 @@ Item {
         show:                   !QGroundControl.videoManager.fullScreen &&
                                     (videoControl.pipState.state === videoControl.pipState.pipState || mapControl.pipState.state === mapControl.pipState.pipState)
     }
+
+    QmlNanoMsgControl
+    {
+          id: qmlNanoMsgControl
+    }
+
+    /*
+    Button{
+         width: 100
+         height:100
+         onClicked: {
+            qmlNanoMsgControl.sendMsg("aaa")
+
+         }
+
+    }
+    */
+
+    SelectControl{
+        id: selectControl
+        x :0
+        y :220
+
+    }
+
 
 }

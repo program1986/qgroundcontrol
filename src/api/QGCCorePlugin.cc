@@ -25,6 +25,7 @@
 #include "HorizontalFactValueGrid.h"
 #include "InstrumentValueData.h"
 
+
 #include <QtQml>
 #include <QQmlEngine>
 
@@ -373,6 +374,9 @@ QQmlApplicationEngine* QGCCorePlugin::createQmlApplicationEngine(QObject* parent
     qmlEngine->addImportPath("qrc:/qml");
     qmlEngine->rootContext()->setContextProperty("joystickManager", qgcApp()->toolbox()->joystickManager());
     qmlEngine->rootContext()->setContextProperty("debugMessageModel", AppMessages::getModel());
+
+
+
     return qmlEngine;
 }
 

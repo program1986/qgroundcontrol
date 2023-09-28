@@ -432,6 +432,7 @@ contains (DEFINES, QGC_ENABLE_PAIRING) {
 HEADERS += \
     src/QmlControls/CustomAction.h \
     src/QmlControls/CustomActionManager.h \
+    src/QmlControls/QmlNanomsgControl.h \
     src/QmlControls/QmlUnitsConversion.h \
     src/Vehicle/VehicleEscStatusFactGroup.h \
     src/api/QGCCorePlugin.h \
@@ -447,6 +448,7 @@ contains (DEFINES, QGC_ENABLE_PAIRING) {
 
 SOURCES += \
     src/QmlControls/CustomActionManager.cc \
+    src/QmlControls/QmlNanomsgControl.cpp \
     src/Vehicle/VehicleEscStatusFactGroup.cc \
     src/api/QGCCorePlugin.cc \
     src/api/QGCOptions.cc \
@@ -1423,7 +1425,11 @@ contains (CONFIG, QGC_DISABLE_INSTALLER_SETUP) {
 }
 
 DISTFILES += \
-    src/QmlControls/QGroundControl/Specific/qmldir
+    src/FlightDisplay/SelectControl.qml \
+    src/QmlControls/QGroundControl/Specific/qmldir \
+    src/QmlControls/SelectControl.qml \
+    src/extra/CommandStructures.js \
+    src/extra/SelectControl.qml
 
 #
 # Steps for "install" target on Linux

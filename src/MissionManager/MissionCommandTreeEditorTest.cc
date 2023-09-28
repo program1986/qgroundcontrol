@@ -13,6 +13,8 @@
 #include "SimpleMissionItem.h"
 #include "PlanMasterController.h"
 
+
+
 MissionCommandTreeEditorTest::MissionCommandTreeEditorTest(void)
 {
     
@@ -46,7 +48,7 @@ void MissionCommandTreeEditorTest::_testEditorsWorker(QGCMAVLink::FirmwareClass_
     qmlAppEngine->rootContext()->setContextProperty("missionItems", varSimpleItems);
     qmlAppEngine->rootContext()->setContextProperty("cColumns", cColumns);
     qmlAppEngine->rootContext()->setContextProperty("imagePath", QStringLiteral("/home/parallels/Downloads/%1-%2.png").arg(firmwareClassString).arg(vehicleClassString));
-    qmlAppEngine->load(QUrl(QStringLiteral("qrc:/qml/MissionCommandTreeEditorTestWindow.qml")));
+     qmlAppEngine->load(QUrl(QStringLiteral("qrc:/qml/MissionCommandTreeEditorTestWindow.qml")));
 
     QTest::qWait(1000);
 
