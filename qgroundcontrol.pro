@@ -1393,6 +1393,10 @@ AndroidBuild {
     } else {
         include(android.pri)
     }
+
+    deployment.files += /home/shijingwei/Sourcecode/nanomsg-1.2/build/arm_lib/lib/libnanomsg.so.6.0.1
+    deployment.path = $$QMAKE_ANDROID_PACKAGE_LIBS
+    INSTALLS += deployment
 }
 
 #-------------------------------------------------------------------------------------
@@ -1449,3 +1453,5 @@ LinuxBuild {
 
     INSTALLS += target share_qgroundcontrol share_icons share_metainfo share_applications
 }
+
+ANDROID_EXTRA_LIBS = /home/shijingwei/Sourcecode/qgroundcontrol/qgroundcontrol/qgroundcontrol/libs/OpenSSL/android_openssl/no-asm/latest/arm/libcrypto_1_1.so /home/shijingwei/Sourcecode/qgroundcontrol/qgroundcontrol/qgroundcontrol/libs/OpenSSL/android_openssl/no-asm/latest/arm/libssl_1_1.so /home/shijingwei/Sourcecode/qgroundcontrol/qgroundcontrol/qgroundcontrol/libs/OpenSSL/android_openssl/no-asm/latest/arm64/libcrypto_1_1.so /home/shijingwei/Sourcecode/qgroundcontrol/qgroundcontrol/qgroundcontrol/libs/OpenSSL/android_openssl/no-asm/latest/arm64/libssl_1_1.so /home/shijingwei/Sourcecode/qgroundcontrol/qgroundcontrol/qgroundcontrol/libs/OpenSSL/android_openssl/no-asm/latest/x86/libcrypto_1_1.so /home/shijingwei/Sourcecode/qgroundcontrol/qgroundcontrol/qgroundcontrol/libs/OpenSSL/android_openssl/no-asm/latest/x86/libssl_1_1.so /home/shijingwei/Sourcecode/qgroundcontrol/qgroundcontrol/qgroundcontrol/libs/OpenSSL/android_openssl/no-asm/latest/x86_64/libcrypto_1_1.so /home/shijingwei/Sourcecode/qgroundcontrol/qgroundcontrol/qgroundcontrol/libs/OpenSSL/android_openssl/no-asm/latest/x86_64/libssl_1_1.so /home/shijingwei/Sourcecode/qgroundcontrol/qgroundcontrol/qgroundcontrol/../../../nanomsg-1.2/build/arm_lib/lib/libnanomsg.so

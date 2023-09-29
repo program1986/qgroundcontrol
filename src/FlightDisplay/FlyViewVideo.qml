@@ -14,7 +14,7 @@ import QGroundControl 1.0
 import QGroundControl.Controls 1.0
 import QGroundControl.Controllers 1.0
 import QGroundControl.ScreenTools 1.0
-import QmlNanoMsgControl 1.0
+//import QmlNanoMsgControl 1.0
 
 Item {
     id: _root

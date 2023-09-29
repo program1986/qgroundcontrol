@@ -179,22 +179,22 @@ Item {
           id: qmlNanoMsgControl
     }
 
-    /*
+
     Button{
-         width: 100
-         height:100
+         width: 300
+         height:300
          onClicked: {
             qmlNanoMsgControl.sendMsg("aaa")
 
          }
 
     }
-    */
+
 
     SelectControl{
         id: selectControl
         x :0
-        y :220
+        y :_root.height/2
 
     }
 

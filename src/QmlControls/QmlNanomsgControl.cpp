@@ -29,7 +29,7 @@ int QmlNanoMsgControl::aaa()
 
 int QmlNanoMsgControl::StartService()
 {
-    char *url = (char*)"tcp://127.0.0.1:2021";
+    char *url = (char*)"tcp://192.168.0.104:2021";
     client_sock = nn_socket(AF_SP, NN_PAIR);
     if (client_sock  < 0)
     {

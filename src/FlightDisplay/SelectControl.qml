@@ -14,7 +14,7 @@ Item {
 
         ColumnLayout {
             id: columnLayout
-            anchors.fill: parent
+            //anchors.fill: parent
 
             Button{
                 id: buttonReset
