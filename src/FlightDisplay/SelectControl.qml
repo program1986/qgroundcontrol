@@ -10,9 +10,9 @@ Item {
         id: rectangle
         x: 0
         y: 0
-        width:  77
-        height: 169
-        radius:5
+        width:  150
+        height: 250
+        radius:4
         border.width:2
         border.color:"#999999"
         color:"#000000"
@@ -29,8 +29,8 @@ Item {
             y: 0
             width: rectangle.width
             height: 169
-            spacing: 0
-            ///anchors.fill: parent
+            spacing: 5
+            //anchors.fill: parent
 
             /*
             Button{
@@ -44,6 +44,7 @@ Item {
             MyButton{
                 id: reset
                 text:"Reset"
+                font.pixelSize: 36
                 implicitWidth: parent.width
             }
 
@@ -51,19 +52,19 @@ Item {
                 id: fixButton
                 text:"Fix"
                 checked: true
-                font.pixelSize: 12
+                font.pixelSize: 36
             }
 
            MyRadioButton{
                 text:"Fllow"
                 checked: false
-                font.pixelSize: 12
+                font.pixelSize: 36
             }
 
             MyRadioButton{
                 text:"Hit"
                 checked: false
-                font.pixelSize: 12
+                font.pixelSize: 36
             }
 
             //fix
