@@ -152,6 +152,35 @@ var GetStatusJsonObject = {
   cmd: CommandList.GET_STATUS           //命令ID
 }
 
+
+var sendCheckSerial =0;
+var setStatusSerial =0;
+
+function setSendCheck(SendCheckJsonObject,startX,startY,endX,endY)
+{
+
+    SendCheckJsonObject.header = 1234
+    SendCheckJsonObject.serial = sendCheckSerial
+    SendCheckJsonObject.param.rect_x = startX
+    SendCheckJsonObject.param.rect_y = startY
+    SendCheckJsonObject.param.rect_width = Math.abs(startX-endX)
+    SendCheckJsonObject.param.rect_height = Math.abs(startY-endY)
+    sendCheckSerial++
+}
+
+
+function getSetStatusJson(status)
+{
+
+    SetStatusJsonObject.header = 1234
+    SetStatusJsonObject.serial = setStatusSerial
+    SetStatusJsonObject.data.status = status
+    setStatusSerial++
+    return JSON.stringify(SetStatusJsonObject)
+
+}
+
+
 // 导出结构定义
 module.exports = {
     "SendCheckJsonObject": SendCheckJsonObject,

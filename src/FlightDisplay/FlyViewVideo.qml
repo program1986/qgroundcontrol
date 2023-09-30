@@ -14,7 +14,9 @@ import QGroundControl 1.0
 import QGroundControl.Controls 1.0
 import QGroundControl.Controllers 1.0
 import QGroundControl.ScreenTools 1.0
-//import QmlNanoMsgControl 1.0
+import QmlNanoMsgControl 1.0
+
+import "CommandStructures.js" as CommandStructures
 
 Item {
     id: _root
@@ -132,14 +134,17 @@ Item {
 
         }
 
-        //QmlNanoMsgControl
-        //{
-        //      id: qmlNanoMsgControl
-        //}
+        QmlNanoMsgControl
+        {
+              id: qmlNanoMsgControl
+        }
 
         MouseArea {
             id: area
             anchors.fill: parent
+
+            property var json
+
             onPressed: {
                 canvas.startX = mouseX
                 canvas.startY = mouseY
@@ -149,14 +154,19 @@ Item {
                 canvas.requestPaint()
             }
             onReleased: {
-                //QmlNanoMsgControl.sendMsg("aaaaa")
-                //console.log(QmlNanoMsgControl.toString())
-                //qmlNanoMsgControl.aaa()
-
-
+                CommandStructures.setSendCheck(CommandStructures.SendCheckJsonObject,canvas.startX,canvas.startY,mouseX,mouseY)
+                json = JSON.stringify(CommandStructures.SendCheckJsonObject)
+                console.log(json)
+                qmlNanoMsgControl.sendMsg(json)
             }
+
+
         }
+
+
     }
+
+
 
     ProximityRadarVideoView {
         anchors.fill: parent
@@ -167,4 +177,9 @@ Item {
         id: obstacleDistance
         showText: pipState.state === pipState.fullState
     }
+
+
+
+
+
 }

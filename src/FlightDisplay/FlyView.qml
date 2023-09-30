@@ -180,17 +180,6 @@ Item {
     }
 
 
-    Button{
-         width: 300
-         height:300
-         onClicked: {
-            qmlNanoMsgControl.sendMsg("aaa")
-
-         }
-
-    }
-
-
     SelectControl{
         id: selectControl
         x :0

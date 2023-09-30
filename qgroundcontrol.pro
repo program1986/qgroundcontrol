@@ -1429,11 +1429,9 @@ contains (CONFIG, QGC_DISABLE_INSTALLER_SETUP) {
 }
 
 DISTFILES += \
-    src/FlightDisplay/SelectControl.qml \
     src/QmlControls/QGroundControl/Specific/qmldir \
     src/QmlControls/SelectControl.qml \
-    src/extra/CommandStructures.js \
-    src/extra/SelectControl.qml
+    src/extra/CommandStructures.js
 
 #
 # Steps for "install" target on Linux
