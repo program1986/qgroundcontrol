@@ -134,10 +134,10 @@ Item {
 
         }
 
-        QmlNanoMsgControl
-        {
-              id: qmlNanoMsgControl
-        }
+        //QmlNanoMsgControl
+        //{
+        //      id: qmlNanoMsgControl
+        //}
 
         MouseArea {
             id: area

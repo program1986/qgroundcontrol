@@ -434,6 +434,7 @@ HEADERS += \
     src/QmlControls/CustomActionManager.h \
     src/QmlControls/QmlNanomsgControl.h \
     src/QmlControls/QmlUnitsConversion.h \
+    src/QmlControls/StateReceiverThread.h \
     src/Vehicle/VehicleEscStatusFactGroup.h \
     src/api/QGCCorePlugin.h \
     src/api/QGCOptions.h \
@@ -449,6 +450,7 @@ contains (DEFINES, QGC_ENABLE_PAIRING) {
 SOURCES += \
     src/QmlControls/CustomActionManager.cc \
     src/QmlControls/QmlNanomsgControl.cpp \
+    src/QmlControls/StateReceiverThread.cpp \
     src/Vehicle/VehicleEscStatusFactGroup.cc \
     src/api/QGCCorePlugin.cc \
     src/api/QGCOptions.cc \

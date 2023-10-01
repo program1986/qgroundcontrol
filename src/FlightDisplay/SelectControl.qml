@@ -1,7 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.12
-
+import "CommandStructures.js" as CommandStructures
 //import QmlNanoMsgControl 1.0
 
 
@@ -53,49 +53,36 @@ Item {
                 text:"Fix"
                 checked: true
                 font.pixelSize: 36
+                onClicked:
+                {
+                    var status=CommandStructures.getSetStatusJson(0)
+                    qmlNanoMsgControl.sendMsg(status)
+
+                }
             }
 
            MyRadioButton{
                 text:"Fllow"
                 checked: false
                 font.pixelSize: 36
+                onClicked:
+                {
+                    var status=CommandStructures.getSetStatusJson(1)
+                    qmlNanoMsgControl.sendMsg(status)
+                }
             }
 
             MyRadioButton{
                 text:"Hit"
                 checked: false
                 font.pixelSize: 36
-            }
-
-            //fix
-
-
-            /*
-            RadioButton {
-                id: radioButtonFix
-                text: qsTr("Fix")
-
-                contentItem: Text{
-                            text: parent.text
-                            color: "red"
-                }
-
-                onCanceled: {
-                    qmlNanoMsgControl.sendMsg("xxxx");
+                onClicked: {
+                    var status=CommandStructures.getSetStatusJson(2)
+                    qmlNanoMsgControl.sendMsg(status);
                 }
             }
 
 
-            RadioButton {
-                id: radioButtonFllow
-                text: qsTr("Fllow")
-            }
-
-            RadioButton {
-                id: radioButtonHit
-                text: qsTr("Hit")
-            }
-*/
           }
 
     }

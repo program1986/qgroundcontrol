@@ -8,6 +8,13 @@
 #include <string.h>
 #include <unistd.h>
 #include <QDebug>
+#include <QString>
+#include <iostream>
+#include <thread>
+#include "StateReceiverThread.h"
+
+
+
 
 QmlNanoMsgControl::QmlNanoMsgControl()
 
@@ -27,9 +34,13 @@ int QmlNanoMsgControl::aaa()
     return 0;
 }
 
+ int aaa()
+{
+    return 0;
+}
 int QmlNanoMsgControl::StartService()
 {
-    char *url = (char*)"tcp://192.168.0.104:2021";
+    char *url = (char*)"tcp://127.0.0.1:2021";
     client_sock = nn_socket(AF_SP, NN_PAIR);
     if (client_sock  < 0)
     {
@@ -43,7 +54,14 @@ int QmlNanoMsgControl::StartService()
         return -1;
     }
 
-    printf("client init success!\n");
+    // 创建状态接收线程实例
+    receiverThread = new StateReceiverThread(client_sock);
+    receiverThread->start();
+
+    //连接槽函数
+    QObject::connect(receiverThread, &StateReceiverThread::dataReady, this, &QmlNanoMsgControl::receiveData);
+
+    qDebug()<<"client init success!\n";
 
     return 0;
 }
@@ -54,8 +72,28 @@ int QmlNanoMsgControl::StopService()
     return 0;
 }
 
+int QmlNanoMsgControl::StatusRecvThread(int sock)
+{
+    int rv;
+    char buf[BUF_LEN];
+
+    while(1)
+    {
+        int bytes;
+        bytes = nn_recv(sock, &buf, NN_MSG, 0);
+        if(bytes)
+        {
+            QString str(buf);
+            //emit putMessageToQML(str);
+        }
+    }
+
+    return (nn_shutdown(sock, rv));
+}
+
 int QmlNanoMsgControl::sendMsg(QString str)
 {
+    qDebug()<<"sendMsg";
     if (ServiceStart==0)
     {
         printf("Service not Start\r\n");
@@ -63,14 +101,13 @@ int QmlNanoMsgControl::sendMsg(QString str)
     }
     QByteArray ba = str.toLatin1(); // must
     char *sendBufferHeader=ba.data();
-
-
-    /*if (nn_send(client_sock, sendBufferHeader, sizeof(sendBufferHeader), 1) < 0) {
-        printf("send failed!\r\n");
-        nn_close(client_sock);
-        return -1;
-    }
-    */
-    nn_send(client_sock, sendBufferHeader, sizeof(sendBufferHeader), 1);
+    qDebug()<<str;
+    nn_send(client_sock, sendBufferHeader, strlen(sendBufferHeader), 1);
     return 0;
+}
+
+void QmlNanoMsgControl::receiveData(QString data)
+{
+    qDebug() << "received data from server:" << data;
+    emit putMessageToQML(data);
 }
