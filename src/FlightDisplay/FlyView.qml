@@ -28,6 +28,8 @@ import QGroundControl.ScreenTools   1.0
 import QGroundControl.Vehicle       1.0
 import QmlNanoMsgControl            1.0
 
+import QtQuick.LocalStorage 2.0
+import Qt.labs.settings 1.0
 
 Item {
     id: _root
@@ -177,6 +179,19 @@ Item {
     QmlNanoMsgControl
     {
           id: qmlNanoMsgControl
+          Component.onCompleted: {
+                  //aaaControl.someFunction() // 调用 AAA 控件的某个函数
+              console.log("QmlNanoMsgControl load completed!")
+              console.log(settings.ipAddress)
+              qmlNanoMsgControl.startService(settings.ipAddress,settings.port)
+
+          }
+    }
+
+    Settings {
+            id: settings
+            property string ipAddress
+            property string port
     }
 
 

@@ -90,6 +90,10 @@ public:
     QmlComponentInfo* pMockLink                 = nullptr;
     QmlComponentInfo* pDebug                    = nullptr;
     QmlComponentInfo* pQmlTest                  = nullptr;
+    //增加namoService设置
+    QmlComponentInfo* pNanoServiceSetting       = nullptr;
+
+
 #endif
     QmlComponentInfo* pRemoteID                  = nullptr;
 
@@ -170,12 +174,21 @@ QVariantList &QGCCorePlugin::settingsPages()
         _p->pMockLink = new QmlComponentInfo(tr("Mock Link"),
                                              QUrl::fromUserInput("qrc:/qml/MockLink.qml"));
         _p->settingsList.append(QVariant::fromValue(reinterpret_cast<QmlComponentInfo*>(_p->pMockLink)));
+
         _p->pDebug = new QmlComponentInfo(tr("Debug"),
                                           QUrl::fromUserInput("qrc:/qml/DebugWindow.qml"));
         _p->settingsList.append(QVariant::fromValue(reinterpret_cast<QmlComponentInfo*>(_p->pDebug)));
+
         _p->pQmlTest = new QmlComponentInfo(tr("Palette Test"),
                                             QUrl::fromUserInput("qrc:/qml/QmlTest.qml"));
         _p->settingsList.append(QVariant::fromValue(reinterpret_cast<QmlComponentInfo*>(_p->pQmlTest)));
+
+        //NanoService
+        _p->pNanoServiceSetting = new QmlComponentInfo(tr("NanoService"),
+                                            QUrl::fromUserInput("qrc:/qml/NanoServiceSetting.qml"));
+        _p->settingsList.append(QVariant::fromValue(reinterpret_cast<QmlComponentInfo*>(_p->pNanoServiceSetting)));
+
+
 #endif
     }
     return _p->settingsList;

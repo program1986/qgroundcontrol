@@ -19,13 +19,13 @@
 QmlNanoMsgControl::QmlNanoMsgControl()
 
 {
-    if (ServiceStart==0)
-    {
-        StartService();
-    }
+    //if (ServiceStart==0)
+    //{
+    //    StartService();
+    //}
 
-    printf("Service  Start\r\n");
-    ServiceStart =1;
+    //printf("Service  Start\r\n");
+    //ServiceStart =1;
 }
 
 int QmlNanoMsgControl::aaa()
@@ -62,13 +62,48 @@ int QmlNanoMsgControl::StartService()
     QObject::connect(receiverThread, &StateReceiverThread::dataReady, this, &QmlNanoMsgControl::receiveData);
 
     qDebug()<<"client init success!\n";
-
+    ServiceStart =1;
     return 0;
 }
 
 int QmlNanoMsgControl::StopService()
 {
     ServiceStart = 0;
+    return 0;
+}
+
+int QmlNanoMsgControl::startService(QString host, int port)
+{
+    char url[255];
+
+    //char *url = (char*)"tcp://127.0.0.1:2021";
+    QByteArray baHost = host.toLatin1();
+
+    sprintf (url,"tcp://%s:%d",baHost.data(),port);
+
+    printf("connect string=%s\n",url);
+    client_sock = nn_socket(AF_SP, NN_PAIR);
+    if (client_sock  < 0)
+    {
+        printf("create server socket failed!\n");
+        return -1;
+    }
+
+    if (nn_connect(client_sock, url) < 0) {
+        printf("connect server sock failed!\r\n");
+        nn_close(client_sock);
+        return -1;
+    }
+
+    // 创建状态接收线程实例
+    receiverThread = new StateReceiverThread(client_sock);
+    receiverThread->start();
+
+    //连接槽函数
+    QObject::connect(receiverThread, &StateReceiverThread::dataReady, this, &QmlNanoMsgControl::receiveData);
+
+    qDebug()<<"client init success!\n";
+    ServiceStart =1;
     return 0;
 }
 

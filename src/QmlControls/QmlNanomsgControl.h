@@ -18,6 +18,7 @@ public:
     explicit QmlNanoMsgControl();
     Q_INVOKABLE int aaa();
     Q_INVOKABLE int sendMsg(QString str);
+    Q_INVOKABLE int startService(QString host,int port);
 
 signals:
     /**
@@ -38,6 +39,7 @@ private:
 
     int StartService();
     int StopService();
+
 
     /**
      * @brief StatusRecvThread 状态接收线程

@@ -292,6 +292,7 @@
         <file alias="QGroundControl/FlightDisplay/MyRadioButton.qml">src/FlightDisplay/MyRadioButton.qml</file>
         <file alias="QGroundControl/FlightDisplay/SelectControl.qml">src/FlightDisplay/SelectControl.qml</file>
         <file alias="QGroundControl/FlightDisplay/MyButton.qml">src/FlightDisplay/MyButton.qml</file>
+        <file alias="NanoServiceSetting.qml">src/QmlControls/NanoServiceSetting.qml</file>
     </qresource>
     <qresource prefix="/FirstRunPromptDialogs">
         <file alias="UnitsFirstRunPrompt.qml">src/FirstRunPromptDialogs/UnitsFirstRunPrompt.qml</file>
