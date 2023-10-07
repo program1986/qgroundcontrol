@@ -90,6 +90,58 @@ Item {
         }
     }
 
+    Timer {
+            interval: 1000 // 设置定时器时间为1秒
+            running: true   // 启动定时器
+            repeat: true    // 循环执行
+
+            onTriggered: {   // 定时器触发的操作
+                trackRect.trackStartX+=30
+                trackRect.trackStartY+=30
+                if (trackRect.trackStartX > parent.width/3){
+                    trackRect.trackStartX =0
+                    trackRect.trackStartY =0
+                }
+                trackRect.requestPaint();
+                console.log("Timer")
+        }
+    }
+    //显示跟踪框
+    Canvas{
+        id:trackRect
+        width: parent.width
+        height: parent.height
+
+        property int count: 0
+        property real trackStartX: 0
+        property real trackStartY: 0
+        property real trackHeitht: 100
+        property real trackWidth: 100
+
+        onPaint:
+        {
+
+            console.log("ONpaint")
+            var ctx = getContext('2d')
+            ctx.reset();
+
+            ctx.lineWidth = 5
+            ctx.strokeStyle = "red"
+            ctx.beginPath()
+
+            //清除屏幕
+
+            ctx.moveTo(trackRect.trackStartX, trackRect.trackStartY)
+
+            //画矩形
+            ctx.rect(trackRect.trackStartX,trackRect.trackStartY,trackRect.trackWidth,trackRect.trackHeitht);
+            ctx.stroke();
+
+
+        }
+
+
+    }
     //新增的按钮功能 reset/fix/fllow/hit  其中后3个是互斥开关。
 
 
