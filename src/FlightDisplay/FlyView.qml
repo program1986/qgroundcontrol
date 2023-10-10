@@ -198,7 +198,6 @@ Item {
     SelectControl{
         id: selectControl
         x : _root.width -selectControl.width
-        //y : _root.height/2
 
         anchors.bottom: parent.bottom
 
