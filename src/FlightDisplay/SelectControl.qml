@@ -3,7 +3,7 @@ import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.12
 import "CommandStructures.js" as CommandStructures
 
-//import QmlNanoMsgControl 1.0
+
 Item {
     id:_root
     x: 0
@@ -13,12 +13,13 @@ Item {
     Rectangle {
         id: rectangle
         radius: 4
+        width:parent.width
+        height:parent.height
         border.width: 2
         border.color: "#999999"
-        //color: "#000000"
-        color : "red"
-
-
+        color: "#000000"
+        Layout.fillWidth: true
+        Layout.fillHeight: true
         ColumnLayout {
             id: columnLayout
             x: 0

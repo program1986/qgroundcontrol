@@ -181,7 +181,6 @@ Item {
     {
           id: qmlNanoMsgControl
           Component.onCompleted: {
-                  //aaaControl.someFunction() // 调用 AAA 控件的某个函数
               console.log("QmlNanoMsgControl load completed!")
               console.log(settings.ipAddress)
               qmlNanoMsgControl.startService(settings.ipAddress,settings.port)
@@ -199,9 +198,9 @@ Item {
     SelectControl{
         id: selectControl
         x : _root.width -selectControl.width
-        y : _root.height/2
+        //y : _root.height/2
 
-
+        anchors.bottom: parent.bottom
 
     }
 

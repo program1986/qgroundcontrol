@@ -49,6 +49,7 @@ Item {
     property alias  _gripperMenu:           gripperOptions
 
 
+
     QGCToolInsets {
         id:                     _totalToolInsets
         leftEdgeTopInset:       toolStrip.leftInset
@@ -98,6 +99,7 @@ Item {
         }
     }
 
+    //试验过
     MultiVehicleList {
         anchors.margins:    _toolsMargin
         anchors.top:        multiVehiclePanelSelector.bottom
@@ -163,11 +165,12 @@ Item {
         property bool _verticalCenter: !QGroundControl.settingsManager.flyViewSettings.alternateInstrumentPanel.rawValue
     }
 
+    //下面的遥感条
     TelemetryValuesBar {
         id:                 telemetryPanel
         x:                  recalcXPosition()
         anchors.margins:    _toolsMargin
-
+        scale:                      0.5
         // States for custom layout support
         states: [
             State {
@@ -231,6 +234,7 @@ Item {
         }
     }
 
+
     //-- Virtual Joystick
     Loader {
         id:                         virtualJoystickMultiTouch
@@ -249,6 +253,7 @@ Item {
         property bool _virtualJoystickEnabled: QGroundControl.settingsManager.appSettings.virtualJoystick.rawValue
     }
 
+
     FlyViewToolStrip {
         id:                     toolStrip
         anchors.leftMargin:     _toolsMargin + parentToolInsets.leftEdgeCenterInset
@@ -263,6 +268,7 @@ Item {
 
         property real leftInset: x + width
     }
+
 
     GripperMenu {
         id: gripperOptions
