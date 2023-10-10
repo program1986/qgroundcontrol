@@ -78,6 +78,7 @@ Item {
     }
 
 
+    // 圆盘和录像按钮
     FlyViewWidgetLayer {
         id:                     widgetLayer
         anchors.top:            parent.top
@@ -142,7 +143,7 @@ Item {
         z:                  QGroundControl.zOrderTopMost
         radius:             ScreenTools.defaultFontPixelWidth / 2
         width:              ScreenTools.defaultFontPixelWidth * 10
-        color:              qgcPal.window 
+        color:              qgcPal.window
         visible:            false
     }
 
@@ -197,8 +198,10 @@ Item {
 
     SelectControl{
         id: selectControl
-        x :0
-        y :_root.height/2
+        x : _root.width -selectControl.width
+        y : _root.height/2
+
+
 
     }
 

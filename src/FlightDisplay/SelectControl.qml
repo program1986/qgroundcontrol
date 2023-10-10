@@ -2,35 +2,33 @@ import QtQuick 2.15
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.12
 import "CommandStructures.js" as CommandStructures
+
 //import QmlNanoMsgControl 1.0
-
-
 Item {
+    id:_root
+    x: 0
+    y: 0
+    width: 150
+    height: 250
     Rectangle {
         id: rectangle
-        x: 0
-        y: 0
-        width:  150
-        height: 250
-        radius:4
-        border.width:2
-        border.color:"#999999"
-        color:"#000000"
+        radius: 4
+        border.width: 2
+        border.color: "#999999"
+        //color: "#000000"
+        color : "red"
 
-
-        //QmlNanoMsgControl
-        //{
-        //      id: qmlNanoMsgControl
-        //}
 
         ColumnLayout {
             id: columnLayout
             x: 0
             y: 0
-            width: rectangle.width
+            width: _root.width
             height: 169
             spacing: 5
+
             //anchors.fill: parent
+
 
             /*
             Button{
@@ -40,51 +38,43 @@ Item {
 
             }
             */
-
-            MyButton{
+            MyButton {
                 id: reset
-                text:"Reset"
+                text: "Reset"
                 font.pixelSize: 36
                 implicitWidth: parent.width
             }
 
-            MyRadioButton{
+            MyRadioButton {
                 id: fixButton
-                text:"Fix"
+                text: "Fix"
                 checked: true
                 font.pixelSize: 36
-                onClicked:
-                {
-                    var status=CommandStructures.getSetStatusJson(0)
-                    qmlNanoMsgControl.sendMsg(status)
-
-                }
-            }
-
-           MyRadioButton{
-                text:"Fllow"
-                checked: false
-                font.pixelSize: 36
-                onClicked:
-                {
-                    var status=CommandStructures.getSetStatusJson(1)
+                onClicked: {
+                    var status = CommandStructures.getSetStatusJson(0)
                     qmlNanoMsgControl.sendMsg(status)
                 }
             }
 
-            MyRadioButton{
-                text:"Hit"
+            MyRadioButton {
+                text: "Fllow"
                 checked: false
                 font.pixelSize: 36
                 onClicked: {
-                    var status=CommandStructures.getSetStatusJson(2)
-                    qmlNanoMsgControl.sendMsg(status);
+                    var status = CommandStructures.getSetStatusJson(1)
+                    qmlNanoMsgControl.sendMsg(status)
                 }
             }
 
-
-          }
-
+            MyRadioButton {
+                text: "Hit"
+                checked: false
+                font.pixelSize: 36
+                onClicked: {
+                    var status = CommandStructures.getSetStatusJson(2)
+                    qmlNanoMsgControl.sendMsg(status)
+                }
+            }
+        }
     }
-
 }

@@ -48,6 +48,7 @@ Item {
     property real   _rightPanelWidth:       ScreenTools.defaultFontPixelWidth * 30
     property alias  _gripperMenu:           gripperOptions
 
+
     QGCToolInsets {
         id:                     _totalToolInsets
         leftEdgeTopInset:       toolStrip.leftInset
@@ -63,6 +64,7 @@ Item {
         bottomEdgeCenterInset:  mapScale.centerInset
         bottomEdgeRightInset:   0
     }
+
 
     FlyViewMissionCompleteDialog {
         missionController:      _missionController
@@ -115,32 +117,37 @@ Item {
         guidedValueSlider:          _guidedValueSlider
     }
 
+    //右上角的圆盘
     FlyViewInstrumentPanel {
         id:                         instrumentPanel
+        //scale:                      0.5
         anchors.margins:            _toolsMargin
         anchors.top:                multiVehiclePanelSelector.visible ? multiVehiclePanelSelector.bottom : parent.top
         anchors.right:              parent.right
-        width:                      _rightPanelWidth
+        width:                      _rightPanelWidth/2
         spacing:                    _toolsMargin
         visible:                    QGroundControl.corePlugin.options.flyView.showInstrumentPanel && multiVehiclePanelSelector.showSingleVehiclePanel
-        availableHeight:            parent.height - y - _toolsMargin
+        availableHeight:            (parent.height - y - _toolsMargin)/2
 
         property real rightInset: visible ? parent.width - x : 0
     }
 
+    //Video 控件
     PhotoVideoControl {
         id:                     photoVideoControl
         anchors.margins:        _toolsMargin
         anchors.right:          parent.right
-        width:                  _rightPanelWidth
+        //anchors.top:            instrumentPanel.bottom
+        width:                  _rightPanelWidth/2
         state:                  _verticalCenter ? "verticalCenter" : "topAnchor"
         states: [
             State {
                 name: "verticalCenter"
                 AnchorChanges {
                     target:                 photoVideoControl
-                    anchors.top:            undefined
-                    anchors.verticalCenter: _root.verticalCenter
+                    //调整位置 shjw
+                    anchors.top:            instrumentPanel.bottom
+                    //anchors.verticalCenter: _root.verticalCenter
                 }
             },
             State {
