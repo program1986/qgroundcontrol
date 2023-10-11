@@ -15,6 +15,8 @@ import QGroundControl.Controls 1.0
 import QGroundControl.Controllers 1.0
 import QGroundControl.ScreenTools 1.0
 import QmlNanoMsgControl 1.0
+import QtQuick.LocalStorage 2.0
+import Qt.labs.settings 1.0
 
 import "CommandStructures.js" as CommandStructures
 
@@ -91,6 +93,7 @@ Item {
     }
 
     Timer {
+        /*
             interval: 1000 // 设置定时器时间为1秒
             running: true   // 启动定时器
             repeat: true    // 循环执行
@@ -104,11 +107,12 @@ Item {
                 }
                 trackRect.requestPaint();
                 console.log("Timer")
-        }
+
+        }*/
     }
     //显示跟踪框
-    Canvas{
-        id:trackRect
+    Canvas {
+        id: trackRect
         width: parent.width
         height: parent.height
 
@@ -117,35 +121,105 @@ Item {
         property real trackStartY: 0
         property real trackHeitht: 100
         property real trackWidth: 100
+        property var parsedData
 
-        onPaint:
-        {
+        Item {
+            id:alarm
+            width: parent.width
+            height: parent.height
+
+            Rectangle {
+                id: dialog
+                color: "#80000000"
+                x:0
+                y:parent.height/2
+                width: 300
+                height: 50
+                border.color: "white"
+                radius: 10
+                visible: false
+                anchors.centerIn: parent
+                Text {
+                    id: dialogText
+                    text: ""
+                    color: "white"
+                    font.pixelSize: 20
+                    anchors.centerIn: parent
+                }
+            }
+
+            function showDialog(text) {
+                dialogText.text = text
+                dialog.visible = true
+            }
+
+            function hideDialog() {
+                dialogText.text = ""
+                dialog.visible = false
+            }
+        }
+
+        onPaint: {
 
             console.log("ONpaint")
             var ctx = getContext('2d')
-            ctx.reset();
+            ctx.reset()
 
-            ctx.lineWidth = 5
-            ctx.strokeStyle = "red"
-            ctx.beginPath()
+            // 获取alarminfo
+            var alarmInfo = parsedData.data.alarm_info
+            if (alarmInfo !== undefined && alarmInfo !== null
+                    && alarmInfo !== "") {
+                alarm.showDialog(alarmInfo)
+            } else {
+               alarm.hideDialog()
+            }
 
-            //清除屏幕
+            //解析Object
+            var objectArray = parsedData.data.object_array
+            for (var i = 0; i < objectArray.length; i++) {
+                var object = objectArray[i]
 
-            ctx.moveTo(trackRect.trackStartX, trackRect.trackStartY)
+                var objectId = object.object_id
+                var objectName = object.object_name
+                var objectConf = object.object_conf
+                var rectColor = object.rect_color
+                var rectX = object.rect_x
+                var rectY = object.rect_y
+                var rectWidth = object.rect_width
+                var rectHeight = object.rect_height
+
+                //画矩形
+                ctx.lineWidth = 5
+                ctx.beginPath()
+                ctx.strokeStyle = rectColor
+                ctx.rect(rectX, rectY, rectWidth, rectHeight)
+                ctx.stroke()
+
+                //写文本
+                ctx.fillStyle = rectColor
+                ctx.font = "bold 16px Arial"
+                var text = objectName + "/" + objectConf
+                var textWidth = ctx.measureText(text).width
+                var textX = rectX + (rectWidth - textWidth) / 2
+                var textY = rectY - 5
+                // 调整文本位置
+                ctx.fillText(text, textX, textY)
+
+                console.log("Object ID:", objectId)
+                console.log("Object Name:", objectName)
+                console.log("Object Confidence:", objectConf)
+                console.log("Rectangle Color:", rectColor)
+                console.log("Rectangle X:", rectX)
+                console.log("Rectangle Y:", rectY)
+                console.log("Rectangle Width:", rectWidth)
+                console.log("Rectangle Height:", rectHeight)
+            }
 
             //画矩形
-            ctx.rect(trackRect.trackStartX,trackRect.trackStartY,trackRect.trackWidth,trackRect.trackHeitht);
-            ctx.stroke();
-
-
         }
-
-
     }
+
     //新增的按钮功能 reset/fix/fllow/hit  其中后3个是互斥开关。
-
-
-
     Canvas {
         id: canvas
         width: parent.width
@@ -156,40 +230,31 @@ Item {
         property real lastX
         property real lastY
 
-
         //清除屏幕
         function clear() {
-                    var ctx = getContext('2d')
-                    ctx.reset();
-                    canvas.requestPaint();
-                }
-
+            var ctx = getContext('2d')
+            ctx.reset()
+            canvas.requestPaint()
+        }
 
         onPaint: {
 
             var ctx = getContext('2d')
-            ctx.reset();
+            ctx.reset()
 
             ctx.lineWidth = 5
             ctx.strokeStyle = "blue"
             ctx.beginPath()
 
             //清除屏幕
-
             ctx.moveTo(startX, startY)
             lastX = area.mouseX
             lastY = area.mouseY
 
             //画矩形
-            ctx.rect(startX,startY,lastX-startX,lastY-startY);
-            ctx.stroke();
-
+            ctx.rect(startX, startY, lastX - startX, lastY - startY)
+            ctx.stroke()
         }
-
-        //QmlNanoMsgControl
-        //{
-        //      id: qmlNanoMsgControl
-        //}
 
         MouseArea {
             id: area
@@ -206,19 +271,15 @@ Item {
                 canvas.requestPaint()
             }
             onReleased: {
-                CommandStructures.setSendCheck(CommandStructures.SendCheckJsonObject,canvas.startX,canvas.startY,mouseX,mouseY)
+                CommandStructures.setSendCheck(
+                            CommandStructures.SendCheckJsonObject,
+                            canvas.startX, canvas.startY, mouseX, mouseY)
                 json = JSON.stringify(CommandStructures.SendCheckJsonObject)
                 console.log(json)
                 qmlNanoMsgControl.sendMsg(json)
             }
-
-
         }
-
-
     }
-
-
 
     ProximityRadarVideoView {
         anchors.fill: parent
@@ -230,8 +291,34 @@ Item {
         showText: pipState.state === pipState.fullState
     }
 
+    QmlNanoMsgControl {
+        id: qmlNanoMsgControl
+        Component.onCompleted: {
+            console.log("QmlNanoMsgControl load completed!")
+            console.log(settings.ipAddress)
+            qmlNanoMsgControl.startService(settings.ipAddress, settings.port)
+        }
+    }
 
+    //publish 接收函数
+    QmlNanoMsgControl {
+        id: publisherMsgControl
+        Component.onCompleted: {
+            console.log("publisherMsgControl load completed!")
+            //console.log(settings.ipAddress)
+            publisherMsgControl.connectPunlisher("127.0.0.1", 5556)
+        }
 
+        onPutMessageToQML: {
+            var parsedData = JSON.parse(json)
+            trackRect.parsedData = parsedData
+            trackRect.requestPaint()
+        }
+    }
 
-
+    Settings {
+        id: settings
+        property string ipAddress
+        property string port
+    }
 }

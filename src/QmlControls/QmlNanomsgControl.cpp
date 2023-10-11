@@ -12,20 +12,15 @@
 #include <iostream>
 #include <thread>
 #include "StateReceiverThread.h"
-
+#include <nanomsg/nn.h>
+#include <nanomsg/pubsub.h>
 
 
 
 QmlNanoMsgControl::QmlNanoMsgControl()
 
 {
-    //if (ServiceStart==0)
-    //{
-    //    StartService();
-    //}
 
-    //printf("Service  Start\r\n");
-    //ServiceStart =1;
 }
 
 int QmlNanoMsgControl::aaa()
@@ -107,6 +102,41 @@ int QmlNanoMsgControl::startService(QString host, int port)
     return 0;
 }
 
+int QmlNanoMsgControl::connectPunlisher(QString host, int port)
+{
+    char url[255];
+
+    QByteArray baHost = host.toLatin1();
+
+    sprintf (url,"tcp://%s:%d",baHost.data(),port);
+
+    printf("public connect string=%s\n",url);
+    publishClientSocket = nn_socket(AF_SP, NN_SUB);
+    if (publishClientSocket  < 0)
+    {
+        printf("Create subscriber socket failed!\n");
+        return -1;
+    }
+
+    if (nn_connect(publishClientSocket, url) < 0) {
+        printf("Connect publish server failed!\r\n");
+        nn_close(publishClientSocket);
+        return -1;
+    }
+
+    // 发布接收函数
+    subscriberThread = new SubscriberThread(publishClientSocket);
+    subscriberThread->start();
+
+    //连接槽函数
+    QObject::connect(subscriberThread, &SubscriberThread::dataReady, this, &QmlNanoMsgControl::receiveData);
+
+    qDebug()<<"client init success!\n";
+    ServiceStart =1;
+    return 0;
+
+}
+
 int QmlNanoMsgControl::StatusRecvThread(int sock)
 {
     int rv;
@@ -143,6 +173,6 @@ int QmlNanoMsgControl::sendMsg(QString str)
 
 void QmlNanoMsgControl::receiveData(QString data)
 {
-    qDebug() << "received data from server:" << data;
+    //qDebug() << "received data from server:" << data;
     emit putMessageToQML(data);
 }

@@ -435,6 +435,7 @@ HEADERS += \
     src/QmlControls/QmlNanomsgControl.h \
     src/QmlControls/QmlUnitsConversion.h \
     src/QmlControls/StateReceiverThread.h \
+    src/QmlControls/SubscriberThread.h \
     src/Vehicle/VehicleEscStatusFactGroup.h \
     src/api/QGCCorePlugin.h \
     src/api/QGCOptions.h \
@@ -451,6 +452,7 @@ SOURCES += \
     src/QmlControls/CustomActionManager.cc \
     src/QmlControls/QmlNanomsgControl.cpp \
     src/QmlControls/StateReceiverThread.cpp \
+    src/QmlControls/SubscriberThread.cpp \
     src/Vehicle/VehicleEscStatusFactGroup.cc \
     src/api/QGCCorePlugin.cc \
     src/api/QGCOptions.cc \
