@@ -215,12 +215,14 @@ Item {
     }
     */
 
+    /*
     SelectControl{
         id: selectControl
         x : _root.width -selectControl.width
         anchors.bottom: parent.bottom
 
     }
+    */
 
 
 }

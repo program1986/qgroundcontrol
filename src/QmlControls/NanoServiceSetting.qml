@@ -32,12 +32,12 @@ Item {
         spacing: 10
 
         // 命令服务器
-        property alias ipAddress: ipField.text
-        property alias password: portField.text
+        //property alias ipAddress: ipField.text
+        //property alias password: portField.text
 
         //状态服务器
-        property alias statusIpAddress: statusIpField.text
-        property alias statusPort: statusPortField.text
+        //property alias statusIpAddress: statusIpField.text
+        //property alias statusPort: statusPortField.text
 
 
         x: 0
@@ -134,11 +134,14 @@ Item {
 
         Settings {
             id: settings
+
+            // 命令服务器
             property string ipAddress
             property string port
 
-            property string  statusIpAddress
-            property string  statusPort
+            //状态服务器
+            property string statusIpAddress
+            property string statusPort
 
             function storeSettings() {
                 settings.ipAddress = ipField.text
@@ -149,6 +152,7 @@ Item {
             }
 
             function loadSettings() {
+                console.log("storeSettings")
                 ipField.text = settings.ipAddress
                 portField.text = settings.port
 

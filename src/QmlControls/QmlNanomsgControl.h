@@ -41,7 +41,7 @@ private:
   SubscriberThread *subscriberThread;
 
 private:
-  int StartService();
+
   int StopService();
 
   /**

@@ -161,7 +161,7 @@ Item {
 
         onPaint: {
 
-            console.log("ONpaint")
+            //console.log("ONpaint")
             var ctx = getContext('2d')
             ctx.reset()
 
@@ -205,6 +205,7 @@ Item {
                 // 调整文本位置
                 ctx.fillText(text, textX, textY)
 
+                /*
                 console.log("Object ID:", objectId)
                 console.log("Object Name:", objectName)
                 console.log("Object Confidence:", objectConf)
@@ -213,6 +214,7 @@ Item {
                 console.log("Rectangle Y:", rectY)
                 console.log("Rectangle Width:", rectWidth)
                 console.log("Rectangle Height:", rectHeight)
+                */
             }
 
             //画矩形
@@ -241,6 +243,7 @@ Item {
 
             var ctx = getContext('2d')
             ctx.reset()
+            if (startX==-1) return
 
             ctx.lineWidth = 5
             ctx.strokeStyle = "blue"
@@ -271,12 +274,17 @@ Item {
                 canvas.requestPaint()
             }
             onReleased: {
-                CommandStructures.setSendCheck(
+                if ( Math.abs(canvas.startX-mouseX)>10 &&  Math.abs(canvas.startY-mouseY)>10)
+                {
+                    CommandStructures.setSendCheck(
                             CommandStructures.SendCheckJsonObject,
                             canvas.startX, canvas.startY, mouseX, mouseY)
-                json = JSON.stringify(CommandStructures.SendCheckJsonObject)
-                console.log(json)
-                qmlNanoMsgControl.sendMsg(json)
+                    json = JSON.stringify(CommandStructures.SendCheckJsonObject)
+                    console.log(json)
+                    qmlNanoMsgControl.sendMsg(json)
+                }
+                canvas.startX =-1
+                canvas.requestPaint()
             }
         }
     }
@@ -295,10 +303,19 @@ Item {
         id: qmlNanoMsgControl
         Component.onCompleted: {
             console.log("QmlNanoMsgControl load completed!")
-            console.log(settings.ipAddress)
+            console.log("address:"+settings.ipAddress+" "+"port"+settings.port)
             qmlNanoMsgControl.startService(settings.ipAddress, settings.port)
         }
     }
+
+    /*
+    property alias statusIpAddress: statusIpField.text
+    property alias statusPort: statusPortField.text
+
+    property string  statusIpAddress
+    property string  statusPort
+    */
+
 
     //publish 接收函数
     QmlNanoMsgControl {
@@ -306,7 +323,8 @@ Item {
         Component.onCompleted: {
             console.log("publisherMsgControl load completed!")
             //console.log(settings.ipAddress)
-            publisherMsgControl.connectPunlisher("127.0.0.1", 5556)
+            console.log("status address:"+settings.statusIpAddress+" "+"port"+settings.statusPort)
+            publisherMsgControl.connectPunlisher(settings.statusIpAddress, settings.statusPort)
         }
 
         onPutMessageToQML: {
@@ -316,9 +334,18 @@ Item {
         }
     }
 
+    SelectControl{
+        id: selectControl
+        x : _root.width -selectControl.width
+        anchors.bottom: parent.bottom
+
+    }
+
     Settings {
         id: settings
         property string ipAddress
         property string port
+        property string statusIpAddress
+        property string statusPort
     }
 }
