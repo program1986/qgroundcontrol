@@ -24,6 +24,10 @@ Item {
     id: _root
     visible: QGroundControl.videoManager.hasVideo
 
+    //VISBOT_MODE_HOVER 0
+    //VISBOT_MODE_TRACK 1
+    property string controlStatus: "VISBOT_MODE_HOVER"
+
     property Item pipState: videoPipState
     QGCPipState {
         id: videoPipState
@@ -124,15 +128,15 @@ Item {
         property var parsedData
 
         Item {
-            id:alarm
+            id: alarm
             width: parent.width
             height: parent.height
 
             Rectangle {
                 id: dialog
                 color: "#80000000"
-                x:0
-                y:parent.height/2
+                x: 0
+                y: parent.height / 2
                 width: 300
                 height: 50
                 border.color: "white"
@@ -162,8 +166,10 @@ Item {
         onPaint: {
 
             //console.log("ONpaint")
+            if (parsedData.cmd!==1) return ;
             var ctx = getContext('2d')
             ctx.reset()
+
 
             // 获取alarminfo
             var alarmInfo = parsedData.data.alarm_info
@@ -171,7 +177,7 @@ Item {
                     && alarmInfo !== "") {
                 alarm.showDialog(alarmInfo)
             } else {
-               alarm.hideDialog()
+                alarm.hideDialog()
             }
 
             //解析Object
@@ -204,6 +210,7 @@ Item {
                 var textY = rectY - 5
                 // 调整文本位置
                 ctx.fillText(text, textX, textY)
+
 
                 /*
                 console.log("Object ID:", objectId)
@@ -243,7 +250,8 @@ Item {
 
             var ctx = getContext('2d')
             ctx.reset()
-            if (startX==-1) return
+            if (startX == -1)
+                return
 
             ctx.lineWidth = 5
             ctx.strokeStyle = "blue"
@@ -274,16 +282,17 @@ Item {
                 canvas.requestPaint()
             }
             onReleased: {
-                if ( Math.abs(canvas.startX-mouseX)>10 &&  Math.abs(canvas.startY-mouseY)>10)
-                {
+                if (Math.abs(canvas.startX - mouseX) > 10 && Math.abs(
+                            canvas.startY - mouseY) > 10) {
                     CommandStructures.setSendCheck(
-                            CommandStructures.SendCheckJsonObject,
-                            canvas.startX, canvas.startY, mouseX, mouseY)
+                                CommandStructures.SendCheckJsonObject,
+                                canvas.startX, canvas.startY, mouseX, mouseY)
                     json = JSON.stringify(CommandStructures.SendCheckJsonObject)
                     console.log(json)
                     qmlNanoMsgControl.sendMsg(json)
+
                 }
-                canvas.startX =-1
+                canvas.startX = -1
                 canvas.requestPaint()
             }
         }
@@ -303,19 +312,10 @@ Item {
         id: qmlNanoMsgControl
         Component.onCompleted: {
             console.log("QmlNanoMsgControl load completed!")
-            console.log("address:"+settings.ipAddress+" "+"port"+settings.port)
+            console.log("address:" + settings.ipAddress + " " + "port" + settings.port)
             qmlNanoMsgControl.startService(settings.ipAddress, settings.port)
         }
     }
-
-    /*
-    property alias statusIpAddress: statusIpField.text
-    property alias statusPort: statusPortField.text
-
-    property string  statusIpAddress
-    property string  statusPort
-    */
-
 
     //publish 接收函数
     QmlNanoMsgControl {
@@ -323,24 +323,59 @@ Item {
         Component.onCompleted: {
             console.log("publisherMsgControl load completed!")
             //console.log(settings.ipAddress)
-            console.log("status address:"+settings.statusIpAddress+" "+"port"+settings.statusPort)
-            publisherMsgControl.connectPunlisher(settings.statusIpAddress, settings.statusPort)
+            console.log("status address:" + settings.statusIpAddress + " "
+                        + "port" + settings.statusPort)
+            publisherMsgControl.connectPunlisher(settings.statusIpAddress,
+                                                 settings.statusPort)
         }
 
         onPutMessageToQML: {
+            print("json from server="+json)
             var parsedData = JSON.parse(json)
             trackRect.parsedData = parsedData
-            trackRect.requestPaint()
+
+            console.log("controlStatus="+controlStatus)
+            console.log("parsedData.cmd="+parsedData.cmd)
+            //跟踪框
+            if (parsedData.cmd===1)
+            {
+                trackRect.requestPaint()
+            }
+
+            if (parsedData.cmd===2)
+            {
+                console.log("mode="+parsedData.data.mode)
+                if (parsedData.data.mode===0)
+                {
+                     console.log("============")
+                    controlStatus = "VISBOT_MODE_HOVER"
+                }
+
+                if (parsedData.data.mode===1)
+                {
+                    console.log("+++++")
+                    controlStatus = "VISBOT_MODE_TRACK"
+                }
+            }
         }
     }
 
-    SelectControl{
-        id: selectControl
-        x : _root.width -selectControl.width
-        anchors.bottom: parent.bottom
+    //VISBOT_MODE_HOVER 0
+    //VISBOT_MODE_TRACK 1
+    SelectControl {
 
+        id: selectControl
+        x: _root.width - selectControl.width
+        anchors.bottom: parent.bottom
+        visible: controlStatus === "VISBOT_MODE_TRACK" // 如果状态为 "select"，显示 SelectControl
     }
 
+    InitialControl {
+        id: initialControl
+        x: _root.width - selectControl.width
+        anchors.bottom: parent.bottom
+        visible: controlStatus === "VISBOT_MODE_HOVER" // 如果状态为 "initial"，显示 InitialControl
+    }
     Settings {
         id: settings
         property string ipAddress

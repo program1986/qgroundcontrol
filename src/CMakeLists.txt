@@ -30,6 +30,12 @@ if(BUILD_TESTING)
 		add_dependencies(check QGroundControl)
 	endfunction()
 
+  # add visbot
+  include_directories(visbot_include/common,visbot_include,visbot_include/service_common,visbot_include/visbot_msg)
+
+
+
+
 	add_subdirectory(qgcunittest)
 
 	add_qgc_test(ComponentInformationCacheTest)

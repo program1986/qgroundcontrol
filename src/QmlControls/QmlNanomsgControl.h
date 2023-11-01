@@ -30,7 +30,7 @@ signals:
   void putMessageToQML(const QString json);
 
 public slots:
-  void receiveData(QString data);
+  void receiveData(QString json);
 
 private:
   int ServiceStart = 0;
@@ -39,7 +39,7 @@ private:
   QThread *thread1;
   StateReceiverThread *receiverThread;
   SubscriberThread *subscriberThread;
-
+  int SendJsonCmd(QString jsonString);
 private:
 
   int StopService();

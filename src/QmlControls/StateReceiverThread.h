@@ -14,7 +14,7 @@ public:
     void run() override;
 
 signals:
-   void dataReady(QString data);
+   void dataReady(char *data, int dataLength);
 private:
     int socket = -1 ;
 

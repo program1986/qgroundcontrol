@@ -20,7 +20,7 @@ private:
     int socket = -1 ;
 
 signals:
-    void dataReady(QString data);
+    void dataReady(QString jsonString );
 };
 
 #endif // SUBSCRIBERTHREAD_H

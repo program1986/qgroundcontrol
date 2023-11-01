@@ -24,10 +24,12 @@ void StateReceiverThread::run()
         bytes = nn_recv(this->socket, buf, BUF_LEN, 0);
         if(bytes)
         {
-            emit dataReady(QString(buf));
+            //const QByteArray& buffer = QByteArray(buf);
+            emit dataReady(buf,bytes);
         }
     }
     nn_shutdown(this->socket, rv);
     return ;
 }
+
 

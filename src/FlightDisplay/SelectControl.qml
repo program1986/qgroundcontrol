@@ -28,17 +28,6 @@ Item {
             height: 169
             spacing: 5
 
-            //anchors.fill: parent
-
-
-            /*
-            Button{
-                id: buttonReset
-                Layout.fillWidth: true
-                text: qsTr("Reset")
-
-            }
-            */
             MyButton {
                 id: reset
                 text: "Reset"

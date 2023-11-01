@@ -420,6 +420,7 @@ INCLUDEPATH += \
     src/ui/toolbar \
     src/ui/uas \
 
+
 contains (DEFINES, QGC_ENABLE_PAIRING) {
     INCLUDEPATH += \
         src/PairingManager \
@@ -442,6 +443,7 @@ HEADERS += \
     src/api/QGCSettings.h \
     src/api/QmlComponentInfo.h \
     src/GPS/Drivers/src/base_station.h \
+
 
 contains (DEFINES, QGC_ENABLE_PAIRING) {
     HEADERS += \
