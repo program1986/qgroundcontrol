@@ -120,6 +120,7 @@ Item {
         width: parent.width
         height: parent.height
 
+
         property int count: 0
         property real trackStartX: 0
         property real trackStartY: 0
@@ -165,11 +166,8 @@ Item {
 
         onPaint: {
 
-            //console.log("ONpaint")
-            if (parsedData.cmd!==1) return ;
             var ctx = getContext('2d')
             ctx.reset()
-
 
             // 获取alarminfo
             var alarmInfo = parsedData.data.alarm_info
@@ -189,10 +187,10 @@ Item {
                 var objectName = object.object_name
                 var objectConf = object.object_conf
                 var rectColor = object.rect_color
-                var rectX = object.rect_x
-                var rectY = object.rect_y
-                var rectWidth = object.rect_width
-                var rectHeight = object.rect_height
+                var rectX = (object.rect_x/1280)*parent.width
+                var rectY = (object.rect_y/720)*parent.height
+                var rectWidth = (object.rect_width/1280)*parent.width
+                var rectHeight = (object.rect_height/720)*parent.height
 
                 //画矩形
                 ctx.lineWidth = 5
@@ -283,12 +281,25 @@ Item {
             }
             onReleased: {
                 if (Math.abs(canvas.startX - mouseX) > 10 && Math.abs(
-                            canvas.startY - mouseY) > 10) {
+                            canvas.startY - mouseY) > 10)
+
+                {
+
+                    var sx = (canvas.startX/parent.width)*1280
+                    var sy = (canvas.startY/parent.height)*720
+                    var ex = (mouseX/parent.width)*1280
+                    var ey = (mouseY/parent.height)*720
+
+                    //CommandStructures.setSendCheck(
+                    //            CommandStructures.SendCheckJsonObject,
+                     //           canvas.startX, canvas.startY, mouseX, mouseY)
+
                     CommandStructures.setSendCheck(
                                 CommandStructures.SendCheckJsonObject,
-                                canvas.startX, canvas.startY, mouseX, mouseY)
+                                sx, sy, ex, ey)
                     json = JSON.stringify(CommandStructures.SendCheckJsonObject)
                     console.log(json)
+
                     qmlNanoMsgControl.sendMsg(json)
 
                 }
@@ -330,12 +341,12 @@ Item {
         }
 
         onPutMessageToQML: {
-            print("json from server="+json)
+            //print("json from server="+json)
             var parsedData = JSON.parse(json)
             trackRect.parsedData = parsedData
 
-            console.log("controlStatus="+controlStatus)
-            console.log("parsedData.cmd="+parsedData.cmd)
+            //console.log("controlStatus="+controlStatus)
+            //console.log("parsedData.cmd="+parsedData.cmd)
             //跟踪框
             if (parsedData.cmd===1)
             {

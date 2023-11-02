@@ -119,7 +119,7 @@ var SetStatusJsonObject = {
   header: 1234,    //服务ID
   serial: 5,       //请求序列号
   cmd: CommandList.SET_STATUS,          //命令ID
-  data: {
+  param: {
     status:0       //在跟踪模式下0:FixPoint 1:Follow 2:Hit
   }
 }
@@ -155,6 +155,7 @@ var GetStatusJsonObject = {
 
 var sendCheckSerial =0;
 var setStatusSerial =0;
+var setModeSerial =0;
 
 function setSendCheck(SendCheckJsonObject,startX,startY,endX,endY)
 {
@@ -174,12 +175,20 @@ function getSetStatusJson(status)
 
     SetStatusJsonObject.header = 1234
     SetStatusJsonObject.serial = setStatusSerial
-    SetStatusJsonObject.data.status = status
+    SetStatusJsonObject.param.status = status
     setStatusSerial++
     return JSON.stringify(SetStatusJsonObject)
 
 }
 
+function getModeJson(mode)
+{
+    SetModeJsonObject.head = 1234
+    SetModeJsonObject.serial = setModeSerial
+    SetStatusJsonObject.param.status = mode
+    setModeSerial++
+    return JSON.stringify(SetModeJsonObject)
+}
 
 // 导出结构定义
 module.exports = {

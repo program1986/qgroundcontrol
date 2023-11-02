@@ -33,6 +33,11 @@ Item {
                 text: "Reset"
                 font.pixelSize: 36
                 implicitWidth: parent.width
+                onClicked: {
+                    var mode = CommandStructures.getModeJson(0)
+                    console.log("=====:"+mode)
+                    qmlNanoMsgControl.sendMsg(mode)
+                }
             }
 
             MyRadioButton {

@@ -1,7 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.12
-
+import "CommandStructures.js" as CommandStructures
 
 
 Item {
@@ -41,8 +41,8 @@ Item {
                 checked: true
                 font.pixelSize: 24
                 onClicked: {
-                    //var status = CommandStructures.getSetStatusJson(0)
-                    //qmlNanoMsgControl.sendMsg(status)
+                    var status = CommandStructures.getSetStatusJson(0)
+                    qmlNanoMsgControl.sendMsg(status)
                 }
             }
 
@@ -52,8 +52,8 @@ Item {
                 checked: false
                 font.pixelSize: 24
                 onClicked: {
-                    //var status = CommandStructures.getSetStatusJson(1)
-                    //qmlNanoMsgControl.sendMsg(status)
+                    var status = CommandStructures.getSetStatusJson(1)
+                    qmlNanoMsgControl.sendMsg(status)
                 }
             }
 
