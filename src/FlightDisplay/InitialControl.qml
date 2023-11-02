@@ -8,8 +8,8 @@ Item {
     id:_root
     x: 0
     y: 0
-    width: 150
-    height: 250
+    width: 350
+    height: 400
     Rectangle {
         id: rectangle
         radius: 4
@@ -31,7 +31,7 @@ Item {
             MyButton {
                 id: reset
                 text: "Reset"
-                font.pixelSize: 36
+                font.pixelSize: 64
                 implicitWidth: parent.width
             }
 
@@ -39,7 +39,7 @@ Item {
                 id: nosccan
                 text: "NOSCAN"
                 checked: true
-                font.pixelSize: 24
+                font.pixelSize: 64
                 onClicked: {
                     var status = CommandStructures.getSetStatusJson(0)
                     qmlNanoMsgControl.sendMsg(status)
@@ -50,7 +50,7 @@ Item {
                 id:scan
                 text: "SCAN"
                 checked: false
-                font.pixelSize: 24
+                font.pixelSize: 64
                 onClicked: {
                     var status = CommandStructures.getSetStatusJson(1)
                     qmlNanoMsgControl.sendMsg(status)

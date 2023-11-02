@@ -8,8 +8,8 @@ Item {
     id:_root
     x: 0
     y: 0
-    width: 150
-    height: 250
+    width: 350
+    height: 400
     Rectangle {
         id: rectangle
         radius: 4
@@ -25,13 +25,13 @@ Item {
             x: 0
             y: 0
             width: _root.width
-            height: 169
+            height: 300
             spacing: 5
 
             MyButton {
                 id: reset
                 text: "Reset"
-                font.pixelSize: 36
+                font.pixelSize: 64
                 implicitWidth: parent.width
                 onClicked: {
                     var mode = CommandStructures.getModeJson(0)
@@ -44,7 +44,7 @@ Item {
                 id: fixButton
                 text: "Fix"
                 checked: true
-                font.pixelSize: 36
+                font.pixelSize: 64
                 onClicked: {
                     var status = CommandStructures.getSetStatusJson(0)
                     qmlNanoMsgControl.sendMsg(status)
@@ -54,7 +54,7 @@ Item {
             MyRadioButton {
                 text: "Fllow"
                 checked: false
-                font.pixelSize: 36
+                font.pixelSize: 64
                 onClicked: {
                     var status = CommandStructures.getSetStatusJson(1)
                     qmlNanoMsgControl.sendMsg(status)
@@ -64,7 +64,7 @@ Item {
             MyRadioButton {
                 text: "Hit"
                 checked: false
-                font.pixelSize: 36
+                font.pixelSize: 64
                 onClicked: {
                     var status = CommandStructures.getSetStatusJson(2)
                     qmlNanoMsgControl.sendMsg(status)

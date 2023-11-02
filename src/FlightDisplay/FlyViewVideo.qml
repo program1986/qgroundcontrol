@@ -358,13 +358,13 @@ Item {
                 console.log("mode="+parsedData.data.mode)
                 if (parsedData.data.mode===0)
                 {
-                     console.log("============")
+
                     controlStatus = "VISBOT_MODE_HOVER"
                 }
 
                 if (parsedData.data.mode===1)
                 {
-                    console.log("+++++")
+
                     controlStatus = "VISBOT_MODE_TRACK"
                 }
             }
