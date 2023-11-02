@@ -78,6 +78,7 @@ Item {
     }
 
 
+
     // 圆盘和录像按钮
     FlyViewWidgetLayer {
         id:                     widgetLayer
@@ -89,7 +90,9 @@ Item {
         parentToolInsets:       _toolInsets
         mapControl:             _mapControl
         visible:                !QGroundControl.videoManager.fullScreen
+
     }
+
 
 
     FlyViewCustomLayer {

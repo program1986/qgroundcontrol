@@ -29,6 +29,8 @@ Item {
     property string controlStatus: "VISBOT_MODE_HOVER"
 
     property Item pipState: videoPipState
+
+
     QGCPipState {
         id: videoPipState
         pipOverlay: _pipOverlay

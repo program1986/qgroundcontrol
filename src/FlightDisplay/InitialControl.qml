@@ -10,6 +10,7 @@ Item {
     y: 0
     width: 350
     height: 400
+
     Rectangle {
         id: rectangle
         radius: 4
@@ -18,6 +19,7 @@ Item {
         border.width: 2
         border.color: "#999999"
         color: "#000000"
+        opacity: 0.5
         Layout.fillWidth: true
         Layout.fillHeight: true
         ColumnLayout {

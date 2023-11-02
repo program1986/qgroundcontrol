@@ -134,6 +134,7 @@ Item {
         property real rightInset: visible ? parent.width - x : 0
     }
 
+    /*
     //Video 控件
     PhotoVideoControl {
         id:                     photoVideoControl
@@ -164,7 +165,7 @@ Item {
 
         property bool _verticalCenter: !QGroundControl.settingsManager.flyViewSettings.alternateInstrumentPanel.rawValue
     }
-
+    */
     //下面的遥感条
     TelemetryValuesBar {
         id:                 telemetryPanel

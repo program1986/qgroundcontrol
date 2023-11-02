@@ -18,6 +18,7 @@ Item {
         border.width: 2
         border.color: "#999999"
         color: "#000000"
+        opacity: 0.5
         Layout.fillWidth: true
         Layout.fillHeight: true
         ColumnLayout {
