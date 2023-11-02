@@ -36,7 +36,6 @@ Item {
                 implicitWidth: parent.width
                 onClicked: {
                     var mode = CommandStructures.getModeJson(0)
-                    console.log("=====:"+mode)
                     qmlNanoMsgControl.sendMsg(mode)
                 }
             }

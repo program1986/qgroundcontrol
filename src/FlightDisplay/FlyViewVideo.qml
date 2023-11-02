@@ -204,7 +204,7 @@ Item {
                 //写文本
                 ctx.fillStyle = rectColor
                 ctx.font = "bold 16px Arial"
-                var text = objectName + "/" + objectConf
+                var text = objectName + "/" + objectConf.toString().slice(0, objectConf.toString().indexOf('.') + 4)
                 var textWidth = ctx.measureText(text).width
                 var textX = rectX + (rectWidth - textWidth) / 2
                 var textY = rectY - 5
@@ -379,14 +379,18 @@ Item {
 
         id: selectControl
         x: _root.width - selectControl.width
-        anchors.bottom: parent.bottom
+        //anchors.centerIn: parent
+        //anchors.bottom: parent.bottom
+        y: 80
         visible: controlStatus === "VISBOT_MODE_TRACK" // 如果状态为 "select"，显示 SelectControl
     }
 
     InitialControl {
         id: initialControl
         x: _root.width - selectControl.width
-        anchors.bottom: parent.bottom
+        //anchors.centerIn: parent
+        y: 80
+        //anchors.bottom: parent.bottom
         visible: controlStatus === "VISBOT_MODE_HOVER" // 如果状态为 "initial"，显示 InitialControl
     }
     Settings {
