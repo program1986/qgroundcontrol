@@ -203,7 +203,8 @@ Item {
 
                 //写文本
                 ctx.fillStyle = rectColor
-                ctx.font = "bold 16px Arial"
+                ctx.font = "18px Roboto, sans-serif"
+
                 var text = objectName + "/" + objectConf.toString().slice(0, objectConf.toString().indexOf('.') + 4)
                 var textWidth = ctx.measureText(text).width
                 var textX = rectX + (rectWidth - textWidth) / 2
