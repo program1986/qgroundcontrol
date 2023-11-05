@@ -2,14 +2,17 @@ import QtQuick 2.15
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.12
 import "CommandStructures.js" as CommandStructures
-
+import QGroundControl 1.0
+import QGroundControl.Controls 1.0
+import QGroundControl.Controllers 1.0
+import QGroundControl.ScreenTools 1.0
 
 Item {
     id:_root
     x: 0
     y: 0
     width: 170
-    height: 310
+    height: 380
     Rectangle {
         id: rectangle
         radius: 4
@@ -28,6 +31,23 @@ Item {
             width: _root.width
             height: 300
             spacing: 5
+
+            MyButton{
+                id: fullScreen
+                text: QGroundControl.videoManager.fullScreen ? "Resume" : "Full"
+                implicitWidth: parent.width
+                font.pixelSize: 50
+                onClicked: {
+                    if(text==='Full'){
+                            QGroundControl.videoManager.fullScreen=true
+                            return
+                    }
+                    if (text==='Resume') {
+                            QGroundControl.videoManager.fullScreen = false
+                        return
+                    }
+                }
+            }
 
             MyButton {
                 id: reset

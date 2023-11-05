@@ -32,6 +32,8 @@ Item {
     property Item pipState: videoPipState
 
 
+
+
     QGCPipState {
         id: videoPipState
         pipOverlay: _pipOverlay
@@ -112,7 +114,6 @@ Item {
         width: parent.width
         height: parent.height
 
-
         property int count: 0
         property real trackStartX: 0
         property real trackStartY: 0
@@ -179,9 +180,6 @@ Item {
                 var objectName = object.object_name
                 var objectConf = object.object_conf
                 var rectColor = object.rect_color
-
-                //var rectX = (object.rect_x/1280)*parent.width
-                //var rectY = (object.rect_y/720)*parent.height
 
 
                 var rectX = object.rect_x
@@ -314,8 +312,10 @@ Item {
 
                 {
                     //todo: 增加sx的偏移计算
-                    var sx = canvas.startX
-                    var sy = (canvas.startY/parent.height)*720
+                    var sx = Math.min(canvas.startX, mouseX)
+                    console.log("sx:",sx)
+                    var tmpy=Math.min(canvas.startY, mouseY)
+                    var sy = (tmpy/parent.height)*720
                     var rect_width = 0
                     var rect_height = 0
                     var xOffset = 0
@@ -433,19 +433,7 @@ Item {
         }
     }
 
-    /*
-    Button {
-        width: 400
-        height:400
-        onClicked: {
-            //QGroundControl.videoManager.setfullScreen = true
-            //QGroundControl.settingsManager.flyViewSettings.
-            console.log(QGroundControl.videoManager.videoSize.width)
-            console.log(parent.height)
-        }
 
-    }
-    */
     //VISBOT_MODE_HOVER 0
     //VISBOT_MODE_TRACK 1
     SelectControl {
@@ -468,6 +456,27 @@ Item {
         anchors.right: parent.right
         visible: controlStatus === "VISBOT_MODE_HOVER" // 如果状态为 "initial"，显示 InitialControl
     }
+
+    //增加进入全屏的按钮
+
+    /*
+    Button {
+        width: 400
+        height:400
+        onClicked: {
+            //QGroundControl.videoManager.setfullScreen = true
+            //QGroundControl.settingsManager.flyViewSettings.
+            console.log(QGroundControl.videoManager.videoSize.width)
+            console.log(parent.height)
+            QGroundControl.videoManager.fullScreen=true
+            console.log(QGroundControl.videoManager.fullScreen)
+        }
+
+    }*/
+
+
+
+
     Settings {
         id: settings
         property string ipAddress
