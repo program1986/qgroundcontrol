@@ -263,7 +263,7 @@ Item {
             ctx.stroke()
         }
 
-
+        /*
         MouseArea {
             id: area
             anchors.fill: parent
@@ -305,9 +305,10 @@ Item {
                 canvas.startX = -1
                 canvas.requestPaint()
             }
-        }
+        } */
 
     }
+
 
     ProximityRadarVideoView {
         anchors.fill: parent
@@ -391,7 +392,7 @@ Item {
         id: selectControl
         x: _root.width - selectControl.width
         //anchors.centerIn: parent
-        anchors.bottom: parent.bottom
+        anchors.top: parent.top
         //y: 180
         visible: controlStatus === "VISBOT_MODE_TRACK" // 如果状态为 "select"，显示 SelectControl
     }
@@ -401,7 +402,7 @@ Item {
         x: _root.width - selectControl.width
         //anchors.centerIn: parent
         //y: 180
-        anchors.bottom: parent.bottom
+        anchors.top: parent.top
         visible: controlStatus === "VISBOT_MODE_HOVER" // 如果状态为 "initial"，显示 InitialControl
     }
     Settings {

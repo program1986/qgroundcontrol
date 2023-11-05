@@ -52,6 +52,7 @@ Item {
                 radius:             ScreenTools.defaultFontPixelWidth / 2
                 color:              "black"
                 opacity:            0.5
+                visible:false
             }
 
 
@@ -62,7 +63,7 @@ Item {
                 color:              "white"
                 font.pointSize:     useSmallFont ? ScreenTools.smallFontPointSize : ScreenTools.largeFontPointSize
                 anchors.centerIn:   parent
-
+                visible:false
             }
         }
 
