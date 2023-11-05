@@ -300,6 +300,19 @@ Item {
     }
     */
 
+    Button{
+        height: 300
+        width:300
+        text:"Click"
+        onClicked: {
+            console.log(QGroundControl.videoManager.videoSize.height)
+            console.log(parent.height)
+
+            console.log(QGroundControl.videoManager.videoSize.width)
+            console.log(parent.width)
+
+        }
+    }
     ProximityRadarVideoView {
         anchors.fill: parent
         vehicle: QGroundControl.multiVehicleManager.activeVehicle
