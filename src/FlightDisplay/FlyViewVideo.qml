@@ -190,8 +190,8 @@ Item {
                 var rectY = (object.rect_y/720)*parent.height
 
 
-                var rectWidth = (object.rect_width/1280)*parent.width
-                var rectHeight = (object.rect_height/720)*parent.height
+                var rectWidth = 0
+                var rectHeight =0
 
                 /*
                 此处需要调整增加x的偏移量。
@@ -218,6 +218,10 @@ Item {
                     var scaleFactor=parent.height/QGroundControl.videoManager.videoSize.height
                     var realVideoWidth = scaleFactor*QGroundControl.videoManager.videoSize.width
                     xOffset = (parent.width - realVideoWidth)/2
+
+                    rectWidth = object.rect_width*scaleFactor
+                    rectHeight = object.rect_height*scaleFactor
+
                     console.log("xOffset:",xOffset)
 
                 }
