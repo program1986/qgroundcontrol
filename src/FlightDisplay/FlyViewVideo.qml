@@ -184,7 +184,7 @@ Item {
                 //var rectY = (object.rect_y/720)*parent.height
 
 
-                var rectX = object.rect_x
+                var rectX = (object.rect_y/720)*parent.height
 
                 //y不用重定位
                 var rectY = object.rect_y
