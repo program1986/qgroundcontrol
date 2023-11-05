@@ -157,15 +157,15 @@ var sendCheckSerial =0;
 var setStatusSerial =0;
 var setModeSerial =0;
 
-function setSendCheck(SendCheckJsonObject,startX,startY,endX,endY)
+function setSendCheck(SendCheckJsonObject,startX,startY,width,height)
 {
 
     SendCheckJsonObject.header = 1234
     SendCheckJsonObject.serial = sendCheckSerial
     SendCheckJsonObject.param.rect_x = startX
     SendCheckJsonObject.param.rect_y = startY
-    SendCheckJsonObject.param.rect_width = Math.abs(startX-endX)
-    SendCheckJsonObject.param.rect_height = Math.abs(startY-endY)
+    SendCheckJsonObject.param.rect_width = width
+    SendCheckJsonObject.param.rect_height = height
     sendCheckSerial++
 }
 

@@ -315,22 +315,11 @@ Item {
                 {
                     //todo: 增加sx的偏移计算
                     var sx = canvas.startX
-
-                    // y不用重定义
                     var sy = (canvas.startY/parent.height)*720
-                    var ex = (mouseX/parent.width)*1280
-                    var ey = (mouseY/parent.height)*720
-
-                    //CommandStructures.setSendCheck(
-                    //            CommandStructures.SendCheckJsonObject,
-                     //           canvas.startX, canvas.startY, mouseX, mouseY)
-
-                    /*计算零偏
-
-
-                    */
-
+                    var rect_width = 0
+                    var rect_height = 0
                     var xOffset = 0
+
                     if (QGroundControl.videoManager.videoSize.height!==0){
 
                         var scaleFactor=parent.height/QGroundControl.videoManager.videoSize.height
@@ -340,14 +329,19 @@ Item {
 
                     }
 
-                    sx = sx -xOffset
+
+
+                    sx = sx/scaleFactor -xOffset
                     if (sx<0 ) {
                         sx = xOffset
                     }
+                    //求宽高
+                    rect_width = Math.abs(canvas.startX - mouseX)/scaleFactor
+                    rect_height = Math.abs(canvas.startY - mouseY)/scaleFactor
 
                     CommandStructures.setSendCheck(
                                 CommandStructures.SendCheckJsonObject,
-                                sx, sy, ex, ey)
+                                sx, sy, rect_width, rect_height)
                     json = JSON.stringify(CommandStructures.SendCheckJsonObject)
                     console.log(json)
 
