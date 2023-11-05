@@ -184,10 +184,11 @@ Item {
                 //var rectY = (object.rect_y/720)*parent.height
 
 
-                var rectX = (object.rect_y/720)*parent.height
+                var rectX = object.rect_x
 
                 //y不用重定位
-                var rectY = object.rect_y
+                var rectY = (object.rect_y/720)*parent.height
+
 
                 var rectWidth = (object.rect_width/1280)*parent.width
                 var rectHeight = (object.rect_height/720)*parent.height
