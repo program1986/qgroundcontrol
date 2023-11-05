@@ -189,6 +189,37 @@ Item {
                 var rectWidth = (object.rect_width/1280)*parent.width
                 var rectHeight = (object.rect_height/720)*parent.height
 
+                /*
+                此处需要调整增加x的偏移量。
+                算法是
+                1） 如果QGroundControl.videoManager.videoSize.height和parent.height都不是0，
+                    用parent.height/QGroundControl.videoManager.videoSize.height 得出比例
+                    scaleFactor
+
+                2） 用 scaleFactor * QGroundControl.videoManager.videoSize.width 得出目前屏幕实际的
+                   realVideoWidth，
+                3) （parent.width - realVideoWidth）/2 即x的零偏
+
+
+                console.log(QGroundControl.videoManager.videoSize.height)
+                console.log(parent.height)
+
+                console.log(QGroundControl.videoManager.videoSize.width)
+                console.log(parent.width)
+                */
+
+                var xOffset = 0
+                if (QGroundControl.videoManager.videoSize.height!==0){
+
+                    var scaleFactor=parent.height/QGroundControl.videoManager.videoSize.height
+                    var realVideoWidth = scaleFactor*QGroundControl.videoManager.videoSize.width
+                    xOffset = (parent.width - realVideoWidth)/2
+                    console.log("xOffset:",xOffset)
+
+                }
+
+
+                rectX = xOffset+rectX;
                 //画矩形
                 ctx.lineWidth = 5
                 ctx.beginPath()
@@ -274,7 +305,7 @@ Item {
                             canvas.startY - mouseY) > 10)
 
                 {
-
+                    //todo: 增加sx的偏移计算
                     var sx = (canvas.startX/parent.width)*1280
                     var sy = (canvas.startY/parent.height)*720
                     var ex = (mouseX/parent.width)*1280
@@ -283,6 +314,26 @@ Item {
                     //CommandStructures.setSendCheck(
                     //            CommandStructures.SendCheckJsonObject,
                      //           canvas.startX, canvas.startY, mouseX, mouseY)
+
+                    /*计算零偏
+
+
+                    */
+
+                    var xOffset = 0
+                    if (QGroundControl.videoManager.videoSize.height!==0){
+
+                        var scaleFactor=parent.height/QGroundControl.videoManager.videoSize.height
+                        var realVideoWidth = scaleFactor*QGroundControl.videoManager.videoSize.width
+                        xOffset = (parent.width - realVideoWidth)/2
+                        console.log("xOffset:",xOffset)
+
+                    }
+
+                    sx = sx -xOffset
+                    if (sx<0 ) {
+                        sx = xOffset
+                    }
 
                     CommandStructures.setSendCheck(
                                 CommandStructures.SendCheckJsonObject,
@@ -300,7 +351,7 @@ Item {
 
     }
 
-
+    /*
     Button{
         height: 300
         width:300
@@ -314,6 +365,8 @@ Item {
 
         }
     }
+    */
+
     ProximityRadarVideoView {
         anchors.fill: parent
         vehicle: QGroundControl.multiVehicleManager.activeVehicle
