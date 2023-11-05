@@ -31,11 +31,6 @@ Item {
 
     property Item pipState: videoPipState
 
-    Component.onCompleted: {
-        QGroundControl.videoManager.fullScreen = true
-        //QGroundControl.videoManager.videoSize.height
-        console.log(QGroundControl.videoManager.videoSize.height)
-    }
 
     QGCPipState {
         id: videoPipState
@@ -184,8 +179,16 @@ Item {
                 var objectName = object.object_name
                 var objectConf = object.object_conf
                 var rectColor = object.rect_color
-                var rectX = (object.rect_x/1280)*parent.width
-                var rectY = (object.rect_y/720)*parent.height
+
+                //var rectX = (object.rect_x/1280)*parent.width
+                //var rectY = (object.rect_y/720)*parent.height
+
+
+                var rectX = object.rect_x
+
+                //y不用重定位
+                var rectY = object.rect_y
+
                 var rectWidth = (object.rect_width/1280)*parent.width
                 var rectHeight = (object.rect_height/720)*parent.height
 
@@ -306,7 +309,9 @@ Item {
 
                 {
                     //todo: 增加sx的偏移计算
-                    var sx = (canvas.startX/parent.width)*1280
+                    var sx = canvas.startX
+
+                    // y不用重定义
                     var sy = (canvas.startY/parent.height)*720
                     var ex = (mouseX/parent.width)*1280
                     var ey = (mouseY/parent.height)*720
@@ -450,6 +455,7 @@ Item {
         x: _root.width - selectControl.width
         //anchors.centerIn: parent
         anchors.top: parent.top
+        anchors.right: parent.right
         //y: 180
         visible: controlStatus === "VISBOT_MODE_TRACK" // 如果状态为 "select"，显示 SelectControl
     }
@@ -460,6 +466,7 @@ Item {
         //anchors.centerIn: parent
         //y: 180
         anchors.top: parent.top
+        anchors.right: parent.right
         visible: controlStatus === "VISBOT_MODE_HOVER" // 如果状态为 "initial"，显示 InitialControl
     }
     Settings {

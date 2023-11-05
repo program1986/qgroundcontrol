@@ -164,7 +164,9 @@ Item {
 
     //Video 播放界面
     FlyViewVideo {
-        id: videoControl
+       id: videoControl
+        width: 1280
+        height: 720
     }
 
 

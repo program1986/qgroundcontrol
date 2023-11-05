@@ -8,8 +8,8 @@ Item {
     id:_root
     x: 0
     y: 0
-    width: 300
-    height: 400
+    width: 170
+    height: 310
     Rectangle {
         id: rectangle
         radius: 4

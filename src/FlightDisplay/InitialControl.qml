@@ -8,8 +8,8 @@ Item {
     id:_root
     x: 0
     y: 0
-    width: 300
-    height: 400
+    width: 220
+    height: 250
 
     Rectangle {
         id: rectangle
@@ -39,7 +39,7 @@ Item {
 
             MyRadioButton {
                 id: nosccan
-                text: "NOSCAN"
+                text: "NoScan"
                 checked: true
                 font.pixelSize: 50
                 onClicked: {
@@ -50,7 +50,7 @@ Item {
 
             MyRadioButton {
                 id:scan
-                text: "SCAN"
+                text: "Scan"
                 checked: false
                 font.pixelSize: 50
                 onClicked: {
