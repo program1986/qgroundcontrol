@@ -109,7 +109,7 @@ Item {
         }
     }
 
-    /*
+
 
     //显示跟踪框
     Canvas {
@@ -211,10 +211,10 @@ Item {
 
         }
     }
-    */
+
 
     //新增的按钮功能 reset/fix/fllow/hit  其中后3个是互斥开关。
- /*
+
     Canvas {
         id: canvas
         width: parent.width
@@ -263,7 +263,8 @@ Item {
             onPressed: {
                 canvas.startX = mouseX
                 canvas.startY = mouseY
-                console.log("MouseX")
+                console.log("MouseX:",mouseX)
+                 console.log("MouseY:",mouseY)
             }
             onPositionChanged: {
                 canvas.requestPaint()
@@ -298,7 +299,7 @@ Item {
         }
 
     }
-    */
+
 
     Button{
         height: 300
