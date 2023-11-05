@@ -223,7 +223,7 @@ Item {
                 }
 
 
-                rectX = xOffset+rectX;
+                rectX = xOffset+rectX*scaleFactor;
                 //画矩形
                 ctx.lineWidth = 5
                 ctx.beginPath()
