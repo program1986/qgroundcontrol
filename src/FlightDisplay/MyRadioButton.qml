@@ -21,8 +21,8 @@ RadioButton {
             x: 6
             y: 6
             radius: 7
-            //color: control.down ? "#17a81a" : "#21be2b"
-            color: control.down ? "#999999" : "#ffffff"
+            color: control.down ? "#17a81a" : "#21be2b"
+            //color: control.down ? "#999999" : "#ffffff"
             visible: control.checked
         }
     }

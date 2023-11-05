@@ -109,6 +109,7 @@ Item {
         }
     }
 
+    /*
 
     //显示跟踪框
     Canvas {
@@ -206,25 +207,14 @@ Item {
                 // 调整文本位置
                 ctx.fillText(text, textX, textY)
 
-
-                /*
-                console.log("Object ID:", objectId)
-                console.log("Object Name:", objectName)
-                console.log("Object Confidence:", objectConf)
-                console.log("Rectangle Color:", rectColor)
-                console.log("Rectangle X:", rectX)
-                console.log("Rectangle Y:", rectY)
-                console.log("Rectangle Width:", rectWidth)
-                console.log("Rectangle Height:", rectHeight)
-                */
             }
 
-            //画矩形
         }
     }
+    */
 
     //新增的按钮功能 reset/fix/fllow/hit  其中后3个是互斥开关。
-
+ /*
     Canvas {
         id: canvas
         width: parent.width
@@ -263,7 +253,7 @@ Item {
             ctx.stroke()
         }
 
-        /*
+
         MouseArea {
             id: area
             anchors.fill: parent
@@ -305,10 +295,10 @@ Item {
                 canvas.startX = -1
                 canvas.requestPaint()
             }
-        } */
+        }
 
     }
-
+    */
 
     ProximityRadarVideoView {
         anchors.fill: parent
