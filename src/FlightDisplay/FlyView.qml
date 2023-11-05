@@ -95,6 +95,8 @@ Item {
 
 
 
+
+
     FlyViewCustomLayer {
         id:                 customOverlay
         anchors.fill:       widgetLayer
@@ -180,52 +182,7 @@ Item {
                                     (videoControl.pipState.state === videoControl.pipState.pipState || mapControl.pipState.state === mapControl.pipState.pipState)
     }
 
-    /*
-    QmlNanoMsgControl
-    {
-          id: qmlNanoMsgControl
-          Component.onCompleted: {
-              console.log("QmlNanoMsgControl load completed!")
-              console.log(settings.ipAddress)
-              qmlNanoMsgControl.startService(settings.ipAddress,settings.port)
 
-          }
-    }
-
-
-    //publish 接收函数
-    QmlNanoMsgControl
-    {
-          id: publisherMsgControl
-          Component.onCompleted: {
-              console.log("publisherMsgControl load completed!")
-              //console.log(settings.ipAddress)
-              publisherMsgControl.connectPunlisher("127.0.0.1",5556)
-
-          }
-
-          onPutMessageToQML: {
-            var parsedData = JSON.parse(json)
-            trackRect.objects =parsedData
-          }
-    }
-
-
-    Settings {
-            id: settings
-            property string ipAddress
-            property string port
-    }
-    */
-
-    /*
-    SelectControl{
-        id: selectControl
-        x : _root.width -selectControl.width
-        anchors.bottom: parent.bottom
-
-    }
-    */
 
 
 }

@@ -9,6 +9,7 @@
  *
  ****************************************************************************/
 import QtQuick 2.12
+import QtQuick.Controls 2.0
 
 import QGroundControl 1.0
 import QGroundControl.Controls 1.0
@@ -30,6 +31,11 @@ Item {
 
     property Item pipState: videoPipState
 
+    Component.onCompleted: {
+        QGroundControl.videoManager.fullScreen = true
+        //QGroundControl.videoManager.videoSize.height
+        console.log(QGroundControl.videoManager.videoSize.height)
+    }
 
     QGCPipState {
         id: videoPipState
@@ -50,7 +56,12 @@ Item {
             if (pipState.state !== pipState.fullState) {
                 QGroundControl.videoManager.fullScreen = false
             }
+
+
         }
+
+
+
     }
 
     Timer {
@@ -98,24 +109,7 @@ Item {
         }
     }
 
-    Timer {
-        /*
-            interval: 1000 // 设置定时器时间为1秒
-            running: true   // 启动定时器
-            repeat: true    // 循环执行
 
-            onTriggered: {   // 定时器触发的操作
-                trackRect.trackStartX+=30
-                trackRect.trackStartY+=30
-                if (trackRect.trackStartX > parent.width/3){
-                    trackRect.trackStartX =0
-                    trackRect.trackStartY =0
-                }
-                trackRect.requestPaint();
-                console.log("Timer")
-
-        }*/
-    }
     //显示跟踪框
     Canvas {
         id: trackRect
@@ -230,6 +224,7 @@ Item {
     }
 
     //新增的按钮功能 reset/fix/fllow/hit  其中后3个是互斥开关。
+
     Canvas {
         id: canvas
         width: parent.width
@@ -267,6 +262,7 @@ Item {
             ctx.rect(startX, startY, lastX - startX, lastY - startY)
             ctx.stroke()
         }
+
 
         MouseArea {
             id: area
@@ -310,6 +306,7 @@ Item {
                 canvas.requestPaint()
             }
         }
+
     }
 
     ProximityRadarVideoView {
@@ -374,6 +371,19 @@ Item {
         }
     }
 
+    /*
+    Button {
+        width: 400
+        height:400
+        onClicked: {
+            //QGroundControl.videoManager.setfullScreen = true
+            //QGroundControl.settingsManager.flyViewSettings.
+            console.log(QGroundControl.videoManager.videoSize.width)
+            console.log(parent.height)
+        }
+
+    }
+    */
     //VISBOT_MODE_HOVER 0
     //VISBOT_MODE_TRACK 1
     SelectControl {
@@ -401,4 +411,6 @@ Item {
         property string statusIpAddress
         property string statusPort
     }
+
+
 }

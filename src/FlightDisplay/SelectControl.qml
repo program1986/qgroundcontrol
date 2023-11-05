@@ -8,7 +8,7 @@ Item {
     id:_root
     x: 0
     y: 0
-    width: 350
+    width: 300
     height: 400
     Rectangle {
         id: rectangle
@@ -18,7 +18,7 @@ Item {
         border.width: 2
         border.color: "#999999"
         color: "#000000"
-        opacity: 0.5
+        opacity:1
         Layout.fillWidth: true
         Layout.fillHeight: true
         ColumnLayout {
@@ -32,7 +32,7 @@ Item {
             MyButton {
                 id: reset
                 text: "Reset"
-                font.pixelSize: 64
+                font.pixelSize: 50
                 implicitWidth: parent.width
                 onClicked: {
                     var mode = CommandStructures.getModeJson(0)
@@ -44,7 +44,7 @@ Item {
                 id: fixButton
                 text: "Fix"
                 checked: true
-                font.pixelSize: 64
+                font.pixelSize: 50
                 onClicked: {
                     var status = CommandStructures.getSetStatusJson(0)
                     qmlNanoMsgControl.sendMsg(status)
@@ -54,7 +54,7 @@ Item {
             MyRadioButton {
                 text: "Fllow"
                 checked: false
-                font.pixelSize: 64
+                font.pixelSize: 50
                 onClicked: {
                     var status = CommandStructures.getSetStatusJson(1)
                     qmlNanoMsgControl.sendMsg(status)
@@ -64,7 +64,7 @@ Item {
             MyRadioButton {
                 text: "Hit"
                 checked: false
-                font.pixelSize: 64
+                font.pixelSize: 50
                 onClicked: {
                     var status = CommandStructures.getSetStatusJson(2)
                     qmlNanoMsgControl.sendMsg(status)

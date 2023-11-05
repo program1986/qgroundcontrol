@@ -598,6 +598,8 @@ VideoManager::uvcEnabled()
 void
 VideoManager::setfullScreen(bool f)
 {
+
+    //f= true;
     if(f) {
         //-- No can do if no vehicle or connection lost
         if(!_activeVehicle || _activeVehicle->vehicleLinkManager()->communicationLost()) {
@@ -606,6 +608,7 @@ VideoManager::setfullScreen(bool f)
     }
     _fullScreen = f;
     emit fullScreenChanged();
+
 }
 
 //-----------------------------------------------------------------------------

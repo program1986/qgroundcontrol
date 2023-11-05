@@ -106,7 +106,8 @@ Item {
         anchors.right:      parent.right
         width:              _rightPanelWidth
         height:             parent.height - y - _toolsMargin
-        visible:            !multiVehiclePanelSelector.showSingleVehiclePanel
+        //visible:            !multiVehiclePanelSelector.showSingleVehiclePanel
+        visible:false
     }
 
 
@@ -119,7 +120,7 @@ Item {
         guidedValueSlider:          _guidedValueSlider
     }
 
-    //右上角的圆盘
+    //右上角的圆盘-disabled
     FlyViewInstrumentPanel {
         id:                         instrumentPanel
         //scale:                      0.5
@@ -128,7 +129,8 @@ Item {
         anchors.right:              parent.right
         width:                      _rightPanelWidth/2
         spacing:                    _toolsMargin
-        visible:                    QGroundControl.corePlugin.options.flyView.showInstrumentPanel && multiVehiclePanelSelector.showSingleVehiclePanel
+        //visible:                    QGroundControl.corePlugin.options.flyView.showInstrumentPanel && multiVehiclePanelSelector.showSingleVehiclePanelc
+        visible:false
         availableHeight:            (parent.height - y - _toolsMargin)/2
 
         property real rightInset: visible ? parent.width - x : 0
@@ -263,8 +265,8 @@ Item {
         anchors.top:            parent.top
         z:                      QGroundControl.zOrderWidgets
         maxHeight:              parent.height - y - parentToolInsets.bottomEdgeLeftInset - _toolsMargin
-        visible:                !QGroundControl.videoManager.fullScreen
-
+        //visible:                !QGroundControl.videoManager.fullScreen
+        visible:false
         onDisplayPreFlightChecklist: preFlightChecklistPopup.createObject(mainWindow).open()
 
         property real leftInset: x + width

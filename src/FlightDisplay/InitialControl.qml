@@ -8,7 +8,7 @@ Item {
     id:_root
     x: 0
     y: 0
-    width: 350
+    width: 300
     height: 400
 
     Rectangle {
@@ -19,7 +19,7 @@ Item {
         border.width: 2
         border.color: "#999999"
         color: "#000000"
-        opacity: 0.5
+        opacity: 1
         Layout.fillWidth: true
         Layout.fillHeight: true
         ColumnLayout {
@@ -33,7 +33,7 @@ Item {
             MyButton {
                 id: reset
                 text: "Reset"
-                font.pixelSize: 64
+                font.pixelSize: 50
                 implicitWidth: parent.width
             }
 
@@ -41,7 +41,7 @@ Item {
                 id: nosccan
                 text: "NOSCAN"
                 checked: true
-                font.pixelSize: 64
+                font.pixelSize: 50
                 onClicked: {
                     var status = CommandStructures.getSetStatusJson(0)
                     qmlNanoMsgControl.sendMsg(status)
@@ -52,7 +52,7 @@ Item {
                 id:scan
                 text: "SCAN"
                 checked: false
-                font.pixelSize: 64
+                font.pixelSize: 50
                 onClicked: {
                     var status = CommandStructures.getSetStatusJson(1)
                     qmlNanoMsgControl.sendMsg(status)
