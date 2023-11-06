@@ -300,8 +300,8 @@ Item {
             onPressed: {
                 canvas.startX = mouseX
                 canvas.startY = mouseY
-                console.log("MouseX:",mouseX)
-                 console.log("MouseY:",mouseY)
+                //console.log("MouseX:",mouseX)
+                //console.log("MouseY:",mouseY)
             }
             onPositionChanged: {
                 canvas.requestPaint()
@@ -313,19 +313,19 @@ Item {
                 {
                     //todo: 增加sx的偏移计算
                     var sx = Math.min(canvas.startX, mouseX)
-                    console.log("sx:",sx)
+                    //console.log("sx:",sx)
                     var tmpy=Math.min(canvas.startY, mouseY)
                     var sy = (tmpy/parent.height)*720
                     var rect_width = 0
                     var rect_height = 0
                     var xOffset = 0
-
+                    var scaleFactor =1
                     if (QGroundControl.videoManager.videoSize.height!==0){
 
-                        var scaleFactor=parent.height/QGroundControl.videoManager.videoSize.height
+                        scaleFactor=parent.height/QGroundControl.videoManager.videoSize.height
                         var realVideoWidth = scaleFactor*QGroundControl.videoManager.videoSize.width
                         xOffset = (parent.width - realVideoWidth)/2
-                        console.log("xOffset:",xOffset)
+                        //console.log("xOffset:",xOffset)
 
                     }
 
@@ -343,7 +343,7 @@ Item {
                                 CommandStructures.SendCheckJsonObject,
                                 sx, sy, rect_width, rect_height)
                     json = JSON.stringify(CommandStructures.SendCheckJsonObject)
-                    console.log(json)
+                    console.log("Rectagle json:",json)
 
                     qmlNanoMsgControl.sendMsg(json)
 

@@ -162,10 +162,10 @@ function setSendCheck(SendCheckJsonObject,startX,startY,width,height)
 
     SendCheckJsonObject.header = 1234
     SendCheckJsonObject.serial = sendCheckSerial
-    SendCheckJsonObject.param.rect_x = startX
-    SendCheckJsonObject.param.rect_y = startY
-    SendCheckJsonObject.param.rect_width = width
-    SendCheckJsonObject.param.rect_height = height
+    SendCheckJsonObject.param.rect_x = Math.floor(startX)
+    SendCheckJsonObject.param.rect_y = Math.floor(startY)
+    SendCheckJsonObject.param.rect_width = Math.floor(width)
+    SendCheckJsonObject.param.rect_height = Math.floor(height)
     sendCheckSerial++
 }
 
