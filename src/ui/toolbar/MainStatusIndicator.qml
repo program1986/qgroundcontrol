@@ -29,6 +29,7 @@ RowLayout {
     property real   _spacing:           ScreenTools.defaultFontPixelWidth / 2
     property bool   _healthAndArmingChecksSupported: _activeVehicle ? _activeVehicle.healthAndArmingCheckReport.supported : false
 
+
     QGCLabel {
         id:             mainStatusLabel
         text:           mainStatusText()
@@ -148,6 +149,7 @@ RowLayout {
             onClicked:      mainWindow.showIndicatorPopup(vtolModeLabel, vtolTransitionComponent)
         }
     }
+
 
     Component {
         id: sensorStatusInfoComponent
@@ -353,6 +355,7 @@ RowLayout {
             }
         }
     }
+
 
     Component {
         id: vtolTransitionComponent
