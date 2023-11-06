@@ -7,12 +7,23 @@ import QGroundControl.Controls 1.0
 import QGroundControl.Controllers 1.0
 import QGroundControl.ScreenTools 1.0
 
+
 Item {
     id:_root
     x: 0
     y: 0
     width: 220
     height: 300
+
+    function scanSetChecked(isChecked) {
+            scan.checked = isChecked
+    }
+
+    function noScanSetChecked(isChecked) {
+            noscan.checked = isChecked
+    }
+
+    //property alias scanSetChecked: scanSetChecked
 
     Rectangle {
         id: rectangle
@@ -25,6 +36,9 @@ Item {
         opacity: 1
         Layout.fillWidth: true
         Layout.fillHeight: true
+
+
+
         ColumnLayout {
             id: columnLayout
             x: 0
@@ -57,7 +71,8 @@ Item {
             }
 
             MyRadioButton {
-                id: nosccan
+
+                id: noscan
                 text: "NoScan"
                 checked: true
                 font.pixelSize: 50
@@ -66,6 +81,8 @@ Item {
                     qmlNanoMsgControl.sendMsg(status)
 
                 }
+
+
             }
 
             MyRadioButton {
@@ -77,9 +94,15 @@ Item {
                     var status = CommandStructures.getSetStatusJson(1)
                     qmlNanoMsgControl.sendMsg(status)
                 }
+
+
             }
 
 
         }
+
+
     }
+
+
 }

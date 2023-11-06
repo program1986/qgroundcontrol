@@ -13,6 +13,19 @@ Item {
     y: 0
     width: 170
     height: 380
+
+    function fixSetChecked(isChecked) {
+            fixButton.checked = isChecked
+    }
+
+    function fllowSetChecked(isChecked) {
+            fllowButton.checked = isChecked
+    }
+
+    function hitSetChecked(isChecked) {
+            hitButton.checked = isChecked
+    }
+
     Rectangle {
         id: rectangle
         radius: 4
@@ -72,6 +85,7 @@ Item {
             }
 
             MyRadioButton {
+                id:fllowButton
                 text: "Fllow"
                 checked: false
                 font.pixelSize: 50
@@ -82,6 +96,7 @@ Item {
             }
 
             MyRadioButton {
+                id:hitButton
                 text: "Hit"
                 checked: false
                 font.pixelSize: 50

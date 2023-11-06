@@ -361,15 +361,15 @@ Item {
         width:300
         text:"Click"
         onClicked: {
-            console.log(QGroundControl.videoManager.videoSize.height)
-            console.log(parent.height)
+            //console.log(QGroundControl.videoManager.videoSize.height)
+            //onsole.log(parent.height)
 
-            console.log(QGroundControl.videoManager.videoSize.width)
-            console.log(parent.width)
-
+            //console.log(QGroundControl.videoManager.videoSize.width)
+            //console.log(parent.width)
+            initialControl.scanSetChecked(true)
         }
-    }
-    */
+    }*/
+
 
     ProximityRadarVideoView {
         anchors.fill: parent
@@ -407,8 +407,6 @@ Item {
             var parsedData = JSON.parse(json)
             trackRect.parsedData = parsedData
 
-            //console.log("controlStatus="+controlStatus)
-            //console.log("parsedData.cmd="+parsedData.cmd)
             //跟踪框
             if (parsedData.cmd===1)
             {
@@ -422,12 +420,39 @@ Item {
                 {
 
                     controlStatus = "VISBOT_MODE_HOVER"
+                    //在悬停模式下0:NoScan 1:Scan;
+
+                    if (parsedData.data.status===0)
+                    {
+                        initialControl.noScanSetChecked(true)
+                    }
+
+                    if (parsedData.data.status===1)
+                    {
+                        initialControl.scanSetChecked(true)
+                    }
                 }
 
                 if (parsedData.data.mode===1)
                 {
 
                     controlStatus = "VISBOT_MODE_TRACK"
+                    //在跟踪模式下0:FixPoint,1:Follow 2:Hit
+                    if (parsedData.data.status===0)
+                    {
+                        selectControl.fixSetChecked(true)
+                    }
+
+                    if (parsedData.data.status===1)
+                    {
+                        selectControl.fllowSetChecked(true)
+                    }
+
+                    if (parsedData.data.status===2)
+                    {
+                        selectControl.hitSetChecked(true)
+                    }
+
                 }
             }
         }
