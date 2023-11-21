@@ -294,6 +294,7 @@
         <file alias="QGroundControl/FlightDisplay/MyButton.qml">src/FlightDisplay/MyButton.qml</file>
         <file alias="NanoServiceSetting.qml">src/QmlControls/NanoServiceSetting.qml</file>
         <file alias="QGroundControl/FlightDisplay/InitialControl.qml">src/FlightDisplay/InitialControl.qml</file>
+        <file alias="QGroundControl/FlightDisplay/SlideButtom.qml">src/FlightDisplay/SlideButtom.qml</file>
     </qresource>
     <qresource prefix="/FirstRunPromptDialogs">
         <file alias="UnitsFirstRunPrompt.qml">src/FirstRunPromptDialogs/UnitsFirstRunPrompt.qml</file>

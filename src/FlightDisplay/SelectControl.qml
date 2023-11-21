@@ -12,7 +12,11 @@ Item {
     x: 0
     y: 0
     width: 170
-    height: 380
+    height: 400
+
+    property int currentStatus
+    property SlideButtom locker
+
 
     function fixSetChecked(isChecked) {
             fixButton.checked = isChecked
@@ -41,15 +45,15 @@ Item {
             id: columnLayout
             x: 0
             y: 0
-            width: _root.width
-            height: 300
-            spacing: 5
+            width: parent.width
+            height: parent.height
+            spacing: 15
 
             MyButton{
                 id: fullScreen
                 text: QGroundControl.videoManager.fullScreen ? "Resume" : "Full"
                 implicitWidth: parent.width
-                font.pixelSize: 50
+                font.pixelSize: 45
                 onClicked: {
                     if(text==='Full'){
                             QGroundControl.videoManager.fullScreen=true
@@ -65,11 +69,14 @@ Item {
             MyButton {
                 id: reset
                 text: "Reset"
-                font.pixelSize: 50
+                font.pixelSize: 45
                 implicitWidth: parent.width
                 onClicked: {
                     var mode = CommandStructures.getModeJson(0)
                     qmlNanoMsgControl.sendMsg(mode)
+                    //currentStatus = 0
+                    //locker.visible = false
+
                 }
             }
 
@@ -77,10 +84,13 @@ Item {
                 id: fixButton
                 text: "Fix"
                 checked: true
-                font.pixelSize: 50
+                font.pixelSize: 45
                 onClicked: {
-                    var status = CommandStructures.getSetStatusJson(0)
-                    qmlNanoMsgControl.sendMsg(status)
+                    //var status = CommandStructures.getSetStatusJson(0)
+                    //qmlNanoMsgControl.sendMsg(status)
+
+                    currentStatus = 0
+                    locker.visible = true
                 }
             }
 
@@ -88,10 +98,12 @@ Item {
                 id:fllowButton
                 text: "Fllow"
                 checked: false
-                font.pixelSize: 50
+                font.pixelSize: 45
                 onClicked: {
-                    var status = CommandStructures.getSetStatusJson(1)
-                    qmlNanoMsgControl.sendMsg(status)
+                    //var status = CommandStructures.getSetStatusJson(1)
+                    //qmlNanoMsgControl.sendMsg(status)
+                    currentStatus = 1
+                    locker.visible = true
                 }
             }
 
@@ -99,10 +111,14 @@ Item {
                 id:hitButton
                 text: "Hit"
                 checked: false
-                font.pixelSize: 50
+                font.pixelSize: 45
                 onClicked: {
-                    var status = CommandStructures.getSetStatusJson(2)
-                    qmlNanoMsgControl.sendMsg(status)
+                    //var status = CommandStructures.getSetStatusJson(2)
+                    //qmlNanoMsgControl.sendMsg(status)
+
+                    currentStatus = 2
+                    locker.visible = true
+
                 }
             }
         }

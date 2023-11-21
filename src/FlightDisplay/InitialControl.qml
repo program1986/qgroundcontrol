@@ -13,7 +13,9 @@ Item {
     x: 0
     y: 0
     width: 220
-    height: 300
+    height: 350
+    property int currentStatus
+    property SlideButtom locker
 
     function scanSetChecked(isChecked) {
             scan.checked = isChecked
@@ -38,14 +40,13 @@ Item {
         Layout.fillHeight: true
 
 
-
         ColumnLayout {
             id: columnLayout
             x: 0
             y: 0
             width: _root.width
-            height: 169
-            spacing: 5
+            height: parent.height
+            spacing: 15
 
             MyButton{
                 id: fullScreen
@@ -77,9 +78,10 @@ Item {
                 checked: true
                 font.pixelSize: 50
                 onClicked: {
-                    var status = CommandStructures.getSetStatusJson(0)
-                    qmlNanoMsgControl.sendMsg(status)
-
+                    //var status = CommandStructures.getSetStatusJson(0)
+                    //qmlNanoMsgControl.sendMsg(status)
+                    locker.visible = true
+                    currentStatus = 0
                 }
 
 
@@ -91,8 +93,11 @@ Item {
                 checked: false
                 font.pixelSize: 50
                 onClicked: {
-                    var status = CommandStructures.getSetStatusJson(1)
-                    qmlNanoMsgControl.sendMsg(status)
+                    locker.visible = true
+                    currentStatus = 1
+                    //var status = CommandStructures.getSetStatusJson(1)
+                    //qmlNanoMsgControl.sendMsg(status)
+
                 }
 
 

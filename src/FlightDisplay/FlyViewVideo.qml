@@ -27,10 +27,12 @@ Item {
 
     //VISBOT_MODE_HOVER 0
     //VISBOT_MODE_TRACK 1
-    property string controlStatus: "VISBOT_MODE_HOVER"
-
+    //property string controlStatus: "VISBOT_MODE_HOVER"
+    property string controlStatus: "VISBOT_MODE_TRACK"
     property Item pipState: videoPipState
 
+    //property Control SlideButtom: value
+    //property alias LockButton: unlockSlider
 
 
 
@@ -106,6 +108,7 @@ Item {
         }
     }
 
+    //显示delaybuttom
 
 
     //显示跟踪框
@@ -300,6 +303,7 @@ Item {
             onPressed: {
                 canvas.startX = mouseX
                 canvas.startY = mouseY
+                unlockSlider.visible = false
                 //console.log("MouseX:",mouseX)
                 //console.log("MouseY:",mouseY)
             }
@@ -369,6 +373,40 @@ Item {
             initialControl.scanSetChecked(true)
         }
     }*/
+
+    SlideButtom {
+            id: unlockSlider
+            visible: false
+            //anchors{top: parent.top; left: parent.left; margins: 150}
+            anchors.centerIn: parent
+            hint: "滑动确认"
+            sourceLock: "qrc:///qmlimages/lock.png"
+            sourceUnlock: "qrc:///qmlimages/unlock.png"
+            onUnlock: {
+                unlockSlider.visible = false
+
+                console.log("current"+initialControl.currentStatus)
+                if (controlStatus === "VISBOT_MODE_TRACK")
+                {
+
+                    var status = CommandStructures.getSetStatusJson(selectControl.currentStatus)
+                    qmlNanoMsgControl.sendMsg(status)
+                    console.log(status);
+                }
+                else
+                {
+                    if (controlStatus === "VISBOT_MODE_HOVER")
+                    {
+                        var status = CommandStructures.getSetStatusJson(initialControl.currentStatus)
+                        qmlNanoMsgControl.sendMsg(status)
+                        console.log(status);
+                    }
+                }
+
+
+
+            }
+        }
 
 
     ProximityRadarVideoView {
@@ -465,6 +503,7 @@ Item {
 
         id: selectControl
         x: _root.width - selectControl.width
+        locker : unlockSlider
         //anchors.centerIn: parent
         anchors.top: parent.top
         anchors.right: parent.right
@@ -477,6 +516,7 @@ Item {
         x: _root.width - selectControl.width
         //anchors.centerIn: parent
         //y: 180
+        locker : unlockSlider
         anchors.top: parent.top
         anchors.right: parent.right
         visible: controlStatus === "VISBOT_MODE_HOVER" // 如果状态为 "initial"，显示 InitialControl
