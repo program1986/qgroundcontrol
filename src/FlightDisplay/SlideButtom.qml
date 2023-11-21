@@ -10,7 +10,7 @@ Item {
     property alias sourceUnlock: unlockIcon.source
     signal unlock
 
-    implicitWidth: 400; implicitHeight: 70
+    implicitWidth: 800; implicitHeight: 170
 
     Rectangle{
         id: bg

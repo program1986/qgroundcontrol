@@ -27,8 +27,8 @@ Item {
 
     //VISBOT_MODE_HOVER 0
     //VISBOT_MODE_TRACK 1
-    //property string controlStatus: "VISBOT_MODE_HOVER"
-    property string controlStatus: "VISBOT_MODE_TRACK"
+    property string controlStatus: "VISBOT_MODE_HOVER"
+    //property string controlStatus: "VISBOT_MODE_TRACK"
     property Item pipState: videoPipState
 
     //property Control SlideButtom: value
