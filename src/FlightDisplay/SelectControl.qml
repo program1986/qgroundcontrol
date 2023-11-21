@@ -91,6 +91,7 @@ Item {
 
                     currentStatus = 0
                     locker.visible = true
+                    locker.hint = "Fix"
                 }
             }
 
@@ -104,6 +105,7 @@ Item {
                     //qmlNanoMsgControl.sendMsg(status)
                     currentStatus = 1
                     locker.visible = true
+                    locker.hint = "Fllow"
                 }
             }
 
@@ -118,6 +120,7 @@ Item {
 
                     currentStatus = 2
                     locker.visible = true
+                    locker.hint = "Hit"
 
                 }
             }

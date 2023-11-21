@@ -82,6 +82,7 @@ Item {
                     //qmlNanoMsgControl.sendMsg(status)
                     locker.visible = true
                     currentStatus = 0
+                    locker.hint = "NoScan"
                 }
 
 
@@ -95,6 +96,7 @@ Item {
                 onClicked: {
                     locker.visible = true
                     currentStatus = 1
+                    locker.hint = "Scan"
                     //var status = CommandStructures.getSetStatusJson(1)
                     //qmlNanoMsgControl.sendMsg(status)
 
