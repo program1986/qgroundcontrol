@@ -72,6 +72,10 @@ WindowsBuild {
     QGC_INSTALLER_ICON          = "$$SOURCE_DIR\\deploy\\windows\\WindowsQGC.ico"
     QGC_INSTALLER_HEADER_BITMAP = "$$SOURCE_DIR\\deploy\\windows\\installheader.bmp"
     QGC_INSTALLER_DRIVER_MSI    = "$$SOURCE_DIR\\deploy\\windows\\driver.msi"
+
+    INCLUDEPATH                 += $$PWD/libs/pthreads-w32-2-9-1-release/Pre-built.2/include
+    message("-----------include------------------")
+    message($$INCLUDEPATH)
 }
 
 # Load additional config flags from user_config.pri
@@ -108,12 +112,17 @@ contains (CONFIG, QGC_DISABLE_CUSTOM_BUILD) {
     }
 }
 
+QMAKE_CXXFLAGS_RELEASE = -O2 -MD -GL
+#QMAKE_CXXFLAGS_DEBUG = -Zi -MDd
+
 WindowsBuild {
     # Sets up application properties
     QMAKE_TARGET_COMPANY        = "$${QGC_ORG_NAME}"
     QMAKE_TARGET_DESCRIPTION    = "$${QGC_APP_DESCRIPTION}"
     QMAKE_TARGET_COPYRIGHT      = "$${QGC_APP_COPYRIGHT}"
     QMAKE_TARGET_PRODUCT        = "$${QGC_APP_NAME}"
+
+
 }
 
 #-------------------------------------------------------------------------------------
@@ -420,6 +429,9 @@ INCLUDEPATH += \
     src/ui/px4_configuration \
     src/ui/toolbar \
     src/ui/uas \
+
+
+
 
 
 contains (DEFINES, QGC_ENABLE_PAIRING) {
@@ -1459,4 +1471,30 @@ LinuxBuild {
     INSTALLS += target share_qgroundcontrol share_icons share_metainfo share_applications
 }
 
-ANDROID_EXTRA_LIBS = /home/shijingwei/Sourcecode/qgroundcontrol/qgroundcontrol/qgroundcontrol/libs/OpenSSL/android_openssl/no-asm/latest/arm/libcrypto_1_1.so /home/shijingwei/Sourcecode/qgroundcontrol/qgroundcontrol/qgroundcontrol/libs/OpenSSL/android_openssl/no-asm/latest/arm/libssl_1_1.so /home/shijingwei/Sourcecode/qgroundcontrol/qgroundcontrol/qgroundcontrol/libs/OpenSSL/android_openssl/no-asm/latest/arm64/libcrypto_1_1.so /home/shijingwei/Sourcecode/qgroundcontrol/qgroundcontrol/qgroundcontrol/libs/OpenSSL/android_openssl/no-asm/latest/arm64/libssl_1_1.so /home/shijingwei/Sourcecode/qgroundcontrol/qgroundcontrol/qgroundcontrol/libs/OpenSSL/android_openssl/no-asm/latest/x86/libcrypto_1_1.so /home/shijingwei/Sourcecode/qgroundcontrol/qgroundcontrol/qgroundcontrol/libs/OpenSSL/android_openssl/no-asm/latest/x86/libssl_1_1.so /home/shijingwei/Sourcecode/qgroundcontrol/qgroundcontrol/qgroundcontrol/libs/OpenSSL/android_openssl/no-asm/latest/x86_64/libcrypto_1_1.so /home/shijingwei/Sourcecode/qgroundcontrol/qgroundcontrol/qgroundcontrol/libs/OpenSSL/android_openssl/no-asm/latest/x86_64/libssl_1_1.so /home/shijingwei/Sourcecode/qgroundcontrol/qgroundcontrol/qgroundcontrol/../../../nanomsg-1.2/build/arm_lib/lib/libnanomsg.so
+ message("----------------------")
+ message($$PWD)
+
+ message("&&&&&&&&&&&&&&&&&&&&&&&&&&")
+ANDROID_EXTRA_LIBS = E:/Sourcecode/Qt/qgroundcontrol/libs/OpenSSL/android_openssl/no-asm/latest/arm/libcrypto_1_1.so E:/Sourcecode/Qt/qgroundcontrol/libs/OpenSSL/android_openssl/no-asm/latest/arm/libssl_1_1.so E:/Sourcecode/Qt/qgroundcontrol/libs/OpenSSL/android_openssl/no-asm/latest/arm64/libcrypto_1_1.so E:/Sourcecode/Qt/qgroundcontrol/libs/OpenSSL/android_openssl/no-asm/latest/arm64/libssl_1_1.so E:/Sourcecode/Qt/qgroundcontrol/libs/OpenSSL/android_openssl/no-asm/latest/x86/libcrypto_1_1.so E:/Sourcecode/Qt/qgroundcontrol/libs/OpenSSL/android_openssl/no-asm/latest/x86/libssl_1_1.so E:/Sourcecode/Qt/qgroundcontrol/libs/OpenSSL/android_openssl/no-asm/latest/x86_64/libcrypto_1_1.so E:/Sourcecode/Qt/qgroundcontrol/libs/OpenSSL/android_openssl/no-asm/latest/x86_64/libssl_1_1.so E:/Sourcecode/Qt/qgroundcontrol/libs/nanomsg-1.2/arm_lib/lib/libnanomsg.so E:/Sourcecode/Qt/qgroundcontrol/libs/nanomsg-1.2/arm_lib/lib/libnanomsg.so $$PWD/../../../PrivateData/AndroidSDK/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/33/libc.so
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/libs/nanomsg-1.2/release/ -lnanomsg
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/libs/nanomsg-1.2/debug/ -lnanomsg
+
+INCLUDEPATH += $$PWD/libs/nanomsg-1.2/windows
+DEPENDPATH += $$PWD/libs/nanomsg-1.2/windows
+
+win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/libs/nanomsg-1.2/release/libnanomsg.a
+else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/libs/nanomsg-1.2/debug/libnanomsg.a
+else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/libs/nanomsg-1.2/release/nanomsg.lib
+else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/libs/nanomsg-1.2/debug/nanomsg.lib
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/libs/nanomsg-1.2/release/ -lnanomsg
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/libs/nanomsg-1.2/debug/ -lnanomsg
+
+INCLUDEPATH += $$PWD/libs/nanomsg-1.2/x86_lib/include/nanomsg
+DEPENDPATH += $$PWD/libs/nanomsg-1.2/x86_lib/include/nanomsg
+
+win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/libs/nanomsg-1.2/release/libnanomsg.a
+else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/libs/nanomsg-1.2/debug/libnanomsg.a
+else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/libs/nanomsg-1.2/release/nanomsg.lib
+else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/libs/nanomsg-1.2/debug/nanomsg.lib

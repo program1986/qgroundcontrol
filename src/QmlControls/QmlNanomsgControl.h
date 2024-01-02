@@ -1,4 +1,4 @@
-#ifndef QMLNANOMSGCONTROL_H
+﻿#ifndef QMLNANOMSGCONTROL_H
 #define QMLNANOMSGCONTROL_H
 #include "StateReceiverThread.h"
 #include "SubscriberThread.h"

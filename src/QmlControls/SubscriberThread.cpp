@@ -1,4 +1,4 @@
-#include "SubscriberThread.h"
+﻿#include "SubscriberThread.h"
 #include <nanomsg/nn.h>
 #include <nanomsg/pubsub.h>
 #include <iostream>

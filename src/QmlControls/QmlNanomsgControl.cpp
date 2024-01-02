@@ -1,4 +1,4 @@
-#include "QmlNanomsgControl.h"
+﻿#include "QmlNanomsgControl.h"
 #include <nanomsg/bus.h>
 #include <nanomsg/nn.h>
 #include <nanomsg/pair.h>
@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <unistd.h>
+//#include <unistd.h>
 #include <QDebug>
 #include <QString>
 #include <iostream>
